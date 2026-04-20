@@ -2214,3 +2214,41 @@ Plan complete and saved to `tasks/todo.md`. Two execution options:
 **2. Inline Execution** — Execute tasks in this session using executing-plans, batch execution with checkpoints
 
 Which approach?
+
+---
+
+## Review (2026-04-20)
+
+### Status
+Tasks 0–17 were already implemented across prior sessions; Task 18 (verification) executed this session. Initial commit `35dda36` lands 77 files on `main`.
+
+### Verification outcomes
+
+| Gate | Result | Notes |
+|---|---|---|
+| `pnpm typecheck` | PASS | `tsc --noEmit` clean. |
+| `pnpm lint` | PASS | 0 errors, 3 warnings (intentional raw `<img>` for Kimi parity in `hero-section.tsx`, `experience-section.tsx`). |
+| `pnpm build` | PASS | Next.js 16.2 + Turbopack. 30 static pages across `/[locale]/*`, `/studio`, `/api/revalidate`. |
+| `pnpm dev` smoke | PASS | `/` → 307 → `/en`. `/en /ko /mn` return 200 with matching `html[lang]`. Accept-Language negotiation works. All 8 stub routes 200. No errors in dev log. |
+| SSR content markers | PASS | `MONGOLIA` / `UNFILTERED` hero, `AMUUN` brand, all 7 experience eyebrows (Gobi, Taiga, Khongoryn, Khermen, Altai, Khorgo, Orkhon), contact `<form>`, 2 stamp SVGs (140×140 viewBox), 8 images (hero + 7). |
+| Reduced-motion | CODE VERIFIED | `globals.css:115 @media (prefers-reduced-motion: reduce)` + `smooth-scroll-provider.tsx:12` matchMedia gate disables Lenis. Runtime DevTools verification deferred to user. |
+
+### Config fixes required during verification
+- **`eslint.config.mjs`** — `eslint-config-next` 16.2 ships flat configs; `FlatCompat.extends(...)` produced a circular-JSON error. Rewrote to import `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript` directly and spread into the flat array. Named the export (`const config = [...]; export default config;`) to satisfy `import/no-anonymous-default-export`.
+- **`postcss.config.mjs`** — same anonymous-default-export warning; named the config.
+- **`src/components/sections/hero-section.tsx:5`** — removed unused `ScrollTrigger` import.
+- **`.gitignore`** — added `tsconfig.tsbuildinfo`.
+
+### Deviations from plan
+- **Kimi parity side-by-side impossible.** The `kimi_k2.5/` reference directory was removed before this verification session, so step 18.5 could not be performed visually. Parity was confirmed structurally via SSR HTML: all design tokens wired through `globals.css`, fonts via Google CDN `@import` per plan, all 7 expedition copy blocks match `messages/en.json` (locked to Kimi source). Runtime animation fidelity (ScrollTrigger pinning, stamp rotation, scrub) needs a manual browser pass next session.
+- **Step 18.5 `ScrollTrigger.getAll().length === 8` check** — browser-only, not run.
+- **Step 18.6 DevTools `prefers-reduced-motion` emulation** — not run; CSS + JS gates verified by inspection only.
+- **Middleware filename** — project uses `src/proxy.ts` (Next.js 16 convention) instead of `src/middleware.ts` listed in the File Structure section. Build output confirms it is active (`ƒ Proxy (Middleware)` line).
+- **`components/sections/global-snap.tsx`** — present in source tree but not listed in plan structure. Benign addition.
+
+### Known follow-ups
+- Manual browser smoke pass (pinned scroll scrub, stamp cursor tracking, Lenis smoothness) before any production deploy.
+- Sanity `/studio` route will throw at runtime until `SANITY_PROJECT_ID` env is provided — expected per plan.
+
+### Next plan
+Sanity schemas (9 documents + 7 objects from PRD Section 7) + tour listing / detail pages with real content wiring.
