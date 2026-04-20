@@ -104,6 +104,15 @@
       "cta": "Build your journey"
     }
   },
+  "toursListing": {
+    "eyebrow": "The collection",
+    "title": "Expeditions",
+    "subtitle": "Seven private journeys across Mongolia's last wild horizons.",
+    "viewExpedition": "View expedition",
+    "durationSuffix": "DAYS",
+    "metaTitle": "Expeditions · Amuun",
+    "metaDescription": "Private 4×4 and trekking expeditions across the Gobi, Altai, Taiga, and Orkhon."
+  },
   "contact": {
     "heading_1": "Begin Your",
     "heading_2": "Journey",

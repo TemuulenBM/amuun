@@ -104,6 +104,15 @@
       "cta": "역사로 들어가기"
     }
   },
+  "toursListing": {
+    "eyebrow": "컬렉션",
+    "title": "원정",
+    "subtitle": "몽골의 마지막 야생 지평선을 가로지르는 일곱 개의 프라이빗 여정.",
+    "viewExpedition": "원정 보기",
+    "durationSuffix": "일",
+    "metaTitle": "원정 · Amuun",
+    "metaDescription": "고비, 알타이, 타이가, 오르혼을 가로지르는 프라이빗 4×4 및 트레킹 원정."
+  },
   "contact": {
     "heading_1": "길의",
     "heading_2": "시작",
