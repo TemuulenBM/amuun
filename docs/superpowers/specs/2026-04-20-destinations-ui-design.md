@@ -7,7 +7,7 @@
 
 ## Goal
 
-Replace the `StubPage` placeholders at `src/app/[locale]/destinations/page.tsx` and `src/app/[locale]/destinations/[slug]/page.tsx` with production-grade destination listing and detail pages. Listing presents Mongolia's five regions as an editorial, region-grouped layout anchored by an interactive Leaflet overview map. Detail pages tell each destination's story and surface the tours running through it.
+Replace the `StubPage` placeholders at `src/app/[locale]/destinations/page.tsx` and `src/app/[locale]/destinations/[slug]/page.tsx` with production-grade destination listing and detail pages. Listing presents Mongolia's five regions as an editorial, region-grouped layout anchored by an interactive MapLibre GL overview map. Detail pages tell each destination's story and surface the tours running through it.
 
 This sub-project also delivers the **destinations half of PRD F14** (interactive map with pins). Tour-route polylines remain a separate sub-project.
 
@@ -56,7 +56,7 @@ Verify `/api/revalidate` already revalidates the `'destination'` tag on Sanity w
 ```
 <main class="relative bg-[#0B0D10]">
   <DestinationsHero />          ← pinned ~80vh; italic+bold "Destinations" headline + editorial intro
-  <DestinationsOverviewMap />   ← client, dynamic Leaflet, ~600px tall, 5 pins
+  <DestinationsOverviewMap />   ← client, dynamic MapLibre GL, ~600px tall, 5 pins
   <DestinationRegionSection />  ← repeated 5×, one per region (Central → Gobi → Western → Northern → Terelj)
   <DestinationsCTABand />       ← "Build a journey across regions" → /custom-trip
 </main>
@@ -75,7 +75,7 @@ Verify `/api/revalidate` already revalidates the `'destination'` tag on Sanity w
   <DestinationStatStrip />      ← Region · Best time · X highlights · Y tours available
   <DestinationStory />          ← Portable Text story (2/3) + Highlights side panel (1/3)
   <DestinationGallery />        ← masonry grid + lightbox (reuses tour-gallery + tour-gallery-lightbox)
-  <DestinationLocationMap />    ← client, dynamic Leaflet, ~400px tall, single pin
+  <DestinationLocationMap />    ← client, dynamic MapLibre GL, ~400px tall, single pin
   <DestinationTours />          ← "Tours featuring this place" — reverse-referenced tour cards (max 6)
   <DestinationCTABand />        ← "Plan a journey here" → /custom-trip
 </main>
@@ -97,16 +97,17 @@ All under `src/components/destination/` unless noted.
 ### Client components (interactive / animation)
 - `destinations-hero.tsx` — `'use client'`, GSAP-pinned listing hero (matches `tour-hero.tsx` pattern)
 - `destination-hero.tsx` — `'use client'`, GSAP-pinned detail hero
-- `destinations-overview-map.tsx` — `'use client'`, dynamic-imports `LeafletMap`
-- `destination-location-map.tsx` — `'use client'`, dynamic-imports `LeafletMap`
+- `destinations-overview-map.tsx` — `'use client'`, dynamic-imports `MapLibre GLMap`
+- `destination-location-map.tsx` — `'use client'`, dynamic-imports `MapLibre GLMap`
 - `destination-gallery.tsx` — reuses existing `tour-gallery.tsx` + `tour-gallery-lightbox.tsx` patterns (already client)
 
 ### Shared
-- `src/components/shared/leaflet-map.tsx` — generic Leaflet wrapper
-  - Props: `center`, `zoom`, `pins[]`, `tileVariant: 'positron' | 'positron-no-labels' | 'dark-matter'`, `onPinClick?`, `height`, `interactive?`
-  - Internal: SSR-safe via `dynamic(() => import('./leaflet-map.client'), { ssr: false })`
-  - Light-tile default: CartoDB Positron
+- `src/components/shared/maplibre-map.tsx` — generic MapLibre GL wrapper
+  - Props: `center`, `zoom`, `pins[]`, `styleUrl`, `onPinClick?`, `height`, `interactive?`
+  - Internal: SSR-safe via `dynamic(() => import('./maplibre-map.client'), { ssr: false })`
+  - Default style: Protomaps light (brand-tinted via `src/styles/maplibre-style.ts`)
   - Includes a screen-reader-only `<ul>` of pins with `aria-label`s for a11y fallback
+  - Pin rendering: custom HTML/SVG markers (gold dot matching brand)
 
 ## Schema Migration Strategy
 
@@ -177,7 +178,7 @@ Embedded as `<script type="application/ld+json">` in the page's server-rendered 
 ## Accessibility
 
 - **Map fallback:** Inside both map components, render an `<ul aria-label={t('destinations.map.regionListLabel')}>` that is `sr-only` but contains every destination as a real link. Screen-reader users navigate via the list, not the map canvas.
-- **Pin a11y:** Each Leaflet marker uses an `aria-label` matching the pin label template. Markers are keyboard-focusable via Leaflet's keyboard nav (`keyboard: true`).
+- **Pin a11y:** Each MapLibre GL marker uses an `aria-label` matching the pin label template. Markers are keyboard-focusable via MapLibre GL's keyboard nav (`keyboard: true`).
 - **Reduced motion:** Pin click → smooth scroll to region section is gated on `window.matchMedia('(prefers-reduced-motion: reduce)').matches`. If reduced, fall back to instant `scrollIntoView({ behavior: 'auto' })`.
 - **Skip link:** Existing layout-level skip link must skip past the map.
 - **WCAG AA contrast:** Region badges, pin labels, and CTA buttons inherit existing token-based colors that already pass AA.
@@ -185,7 +186,7 @@ Embedded as `<script type="application/ld+json">` in the page's server-rendered 
 
 ## Dark-Mode Hook (Future-Proof)
 
-The `LeafletMap` component accepts a `tileVariant` prop. Default is `'positron'`. When the dark mode toggle (PRD F40) ships, callers can pass `'dark-matter'` based on the active theme. No conditional logic in this spec; just the prop surface so the integration is a one-line change later.
+The `MaplibreMap` component accepts a `styleUrl` prop. Default points to a brand-tinted Protomaps light style. When the dark mode toggle (PRD F40) ships, callers can pass a dark style URL (Protomaps "dark" or our own brand-tinted dark JSON). No conditional logic in this spec; just the prop surface so the integration is a one-line change later.
 
 ## Error Handling
 
@@ -193,7 +194,7 @@ The `LeafletMap` component accepts a `tileVariant` prop. Default is `'positron'`
 |---|---|
 | Slug not found | `notFound()` returns the existing not-found page |
 | Sanity fetch failure | `error.tsx` at `/[locale]/destinations` and `/[locale]/destinations/[slug]` (small wrappers around shared error UI) |
-| Leaflet load failure | The `dynamic` loader's fallback renders a `<div role="alert">` explaining the map is unavailable, plus the SR fallback list is visible to all users |
+| MapLibre GL load failure | The `dynamic` loader's fallback renders a `<div role="alert">` explaining the map is unavailable, plus the SR fallback list is visible to all users |
 | No tours referenced | `destination-tours.tsx` renders the `destinations.detail.noTours` message instead of an empty grid |
 | No coordinates on a destination doc | `destinations-overview-map.tsx` filters out pins where `coordinates` is `null`; detail map renders fallback message |
 
@@ -243,20 +244,30 @@ PRD-aligned manual QA, no automated test setup.
 
 - **Lazy-loading the listing map** via intersection observer — post-launch perf optimization
 - **CartoDB tile localization** (Mongolian/Korean labels) — current OSM-source labels accepted
-- **Dark mode integration** — surface ready via `tileVariant` prop, wiring deferred to F40
+- **Dark mode integration** — surface ready via `styleUrl` prop (with `MAPLIBRE_STYLE_DARK` already exported), wiring deferred to F40
 - **Tour-route polylines on map** — separate F14 sub-project
 - **Cross-region "related destinations" section** on detail — YAGNI for 5 destinations
 - **Schema migration to make `coordinates` required** — separate follow-up PR after seed verified
-- **Custom Leaflet marker icons** matching brand — Phase B polish; default markers acceptable initially as long as they're styled minimally (gold dot or similar)
+- **Custom MapLibre GL marker icons** matching brand — Phase B polish; default markers acceptable initially as long as they're styled minimally (gold dot or similar)
 
 ## Dependencies
 
 **Not currently installed.** Add before scaffolding components:
-- `leaflet` (1.9.x)
-- `react-leaflet` — version must be selected for **React 19 + Next 16** compatibility. `react-leaflet` 4.x targets React 18; verify whether 5.x (or a community fork) is required, or whether to use raw `leaflet` directly inside an effect-managed wrapper without `react-leaflet`. Resolve at implementation time using Context7 / npm latest.
-- `@types/leaflet` (dev)
+- `maplibre-gl` — MapLibre GL JS core (vector-tile renderer, MIT-licensed fork of Mapbox GL JS pre-BSL)
+- `react-map-gl` — React wrapper; import bindings from `react-map-gl/maplibre` entry point (supports React 18/19 and Next 16)
 
-CSS: import `leaflet/dist/leaflet.css` once at the layout level or scoped to the map component.
+CSS: import `maplibre-gl/dist/maplibre-gl.css` once at the map component level.
+
+## Tile Provider
+
+**Protomaps hosted basemap** as default (free, no API key required for development):
+
+- URL: `https://api.protomaps.com/v4.pmtiles` (public demo instance) or self-hosted `.pmtiles` on Vercel's edge
+- Style: Protomaps "light" (default) with brand color overrides for roads and labels; `"dark"` style available for future dark-mode wiring
+
+Switch to paid/self-hosted tiles at traffic volume. An alternative (no-key) provider is **OpenFreeMap** — also free, community-hosted.
+
+Styles are plain JSON, so the component accepts a `styleUrl` prop and brand customization happens in a single `src/styles/maplibre-style.ts` module — not hard-coded in the component.
 
 ## Open Questions
 
