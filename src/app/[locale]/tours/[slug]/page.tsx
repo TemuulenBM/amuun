@@ -14,6 +14,7 @@ import { TourPricing } from '@/components/tour/tour-pricing';
 import { TourCtaBand } from '@/components/tour/tour-cta-band';
 import { TourItinerary } from '@/components/tour/tour-itinerary';
 import { TourGallery } from '@/components/tour/tour-gallery';
+import { TourFaqs } from '@/components/tour/tour-faqs';
 import { TourRelated } from '@/components/tour/tour-related';
 import { TourStatStrip } from '@/components/tour/tour-stat-strip';
 import { routing } from '@/i18n/routing';
@@ -112,6 +113,9 @@ export default async function TourDetailPage({
       <TourIncludedExcluded included={tour.included} excluded={tour.excluded} locale={locale} />
       {tour.gallery && tour.gallery.length > 0 ? (
         <TourGallery images={tour.gallery} locale={locale} />
+      ) : null}
+      {tour.faqs && tour.faqs.length > 0 ? (
+        <TourFaqs faqs={tour.faqs} locale={locale} />
       ) : null}
       {tour.relatedTours && tour.relatedTours.length > 0 ? (
         <TourRelated tours={tour.relatedTours} locale={locale} />
