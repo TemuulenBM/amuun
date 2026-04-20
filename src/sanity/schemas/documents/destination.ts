@@ -39,6 +39,13 @@ export const destination = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'coordinates',
+      title: 'Coordinates',
+      description: 'Geographic centroid used for map pins.',
+      type: 'geopoint',
+      group: 'content',
+    }),
+    defineField({
       name: 'bestTime',
       title: 'Best time to visit',
       type: 'localeString',

@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { sanityClient } from '../client';
 import { projectId } from '../env';
 
@@ -6,10 +7,11 @@ interface FetchOptions {
   revalidate?: number | false;
 }
 
-export async function sanityFetch<T>(
+async function fetchInternal<T>(
   query: string,
-  params: Record<string, unknown> = {},
-  options: FetchOptions = {},
+  paramsKey: string,
+  tagsKey: string,
+  revalidate: number | false,
 ): Promise<T | null> {
   if (!projectId) {
     if (process.env.NODE_ENV !== 'production') {
@@ -18,14 +20,31 @@ export async function sanityFetch<T>(
     return null;
   }
   try {
-    return await sanityClient.fetch<T>(query, params, {
+    return await sanityClient.fetch<T>(query, JSON.parse(paramsKey), {
       next: {
-        tags: options.tags,
-        revalidate: options.revalidate ?? 3600,
+        tags: tagsKey ? JSON.parse(tagsKey) : undefined,
+        revalidate,
       },
     });
   } catch (error: unknown) {
     console.error('[sanity] fetch failed', error);
     return null;
   }
+}
+
+// Wrap in React.cache so repeated calls (e.g. generateMetadata + page render
+// with the same query/params) dedupe at the request scope.
+const cachedFetch = cache(fetchInternal);
+
+export async function sanityFetch<T>(
+  query: string,
+  params: Record<string, unknown> = {},
+  options: FetchOptions = {},
+): Promise<T | null> {
+  return cachedFetch<T>(
+    query,
+    JSON.stringify(params),
+    options.tags ? JSON.stringify(options.tags) : '',
+    options.revalidate ?? 3600,
+  );
 }

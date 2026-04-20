@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace the stubs at `src/app/[locale]/destinations/page.tsx` and `src/app/[locale]/destinations/[slug]/page.tsx` with production listing + detail pages anchored by an interactive Leaflet map and the existing dark+gold editorial-luxury aesthetic.
+**Goal:** Replace the stubs at `src/app/[locale]/destinations/page.tsx` and `src/app/[locale]/destinations/[slug]/page.tsx` with production listing + detail pages anchored by an interactive MapLibre GL vector map and the existing dark+gold editorial-luxury aesthetic.
 
-**Architecture:** Server Components fetch existing GROQ queries (`allDestinationsQuery`, `destinationBySlugQuery`) via `sanityFetch`. Listing groups results by region; detail composes a 7-section narrative. Two GSAP-pinned heroes (one per page). Two Leaflet maps via a shared `LeafletMap` wrapper that is dynamic-imported with `ssr: false` and ships an `sr-only` fallback list for screen readers. Schema gains an optional `coordinates` geopoint; seed data gains `story`, `gallery`, and `coordinates` for all five destinations.
+**Architecture:** Server Components fetch existing GROQ queries (`allDestinationsQuery`, `destinationBySlugQuery`) via `sanityFetch`. Listing groups results by region; detail composes a 7-section narrative. Two GSAP-pinned heroes (one per page). Two MapLibre GL JS maps (vector tiles, Protomaps style) via a shared `MaplibreMap` wrapper that is dynamic-imported with `ssr: false` and ships an `sr-only` fallback list for screen readers. Schema gains an optional `coordinates` geopoint; seed data gains `story`, `gallery`, and `coordinates` for all five destinations.
 
-**Tech Stack:** Next.js 16, React 19, TypeScript, Sanity, next-intl, GSAP, Tailwind v4, `@portabletext/react`, `leaflet` (new), `react-leaflet` (new — version selected per React 19 compat at install time).
+**Tech Stack:** Next.js 16, React 19, TypeScript, Sanity, next-intl, GSAP, Tailwind v4, `@portabletext/react`, `maplibre-gl` (new), `react-map-gl/maplibre` (new).
 
 **Spec:** [docs/superpowers/specs/2026-04-20-destinations-ui-design.md](../specs/2026-04-20-destinations-ui-design.md)
 
@@ -17,10 +17,11 @@
 ## File Map
 
 **New files:**
-- `src/components/shared/leaflet-map.tsx` — server wrapper that dynamic-imports the client implementation
-- `src/components/shared/leaflet-map.client.tsx` — `'use client'`, actual Leaflet bindings + SR fallback `<ul>`
+- `src/components/shared/maplibre-map.tsx` — server wrapper that dynamic-imports the client implementation
+- `src/components/shared/maplibre-map.client.tsx` — `'use client'`, actual MapLibre bindings + SR fallback `<ul>`
+- `src/styles/maplibre-style.ts` — exported style URL constants (light + dark) and brand color overrides
 - `src/components/destination/destinations-hero.tsx` — client GSAP-pinned listing hero
-- `src/components/destination/destinations-overview-map.tsx` — client wrapper that passes 5 pins to `LeafletMap`
+- `src/components/destination/destinations-overview-map.tsx` — client wrapper that passes 5 pins to `MaplibreMap`
 - `src/components/destination/destination-card.tsx` — server card (image left/right alternating)
 - `src/components/destination/destination-region-section.tsx` — server, header + cards for one region
 - `src/components/destination/destinations-cta-band.tsx` — server, shared between listing and detail
@@ -28,11 +29,11 @@
 - `src/components/destination/destination-stat-strip.tsx` — server italic+bold strip
 - `src/components/destination/destination-story.tsx` — server, Portable Text + Highlights side panel
 - `src/components/destination/destination-gallery.tsx` — client, masonry + lightbox (extracted reuse of tour gallery)
-- `src/components/destination/destination-location-map.tsx` — client wrapper that passes 1 pin to `LeafletMap`
+- `src/components/destination/destination-location-map.tsx` — client wrapper that passes 1 pin to `MaplibreMap`
 - `src/components/destination/destination-tours.tsx` — server, tour card grid for reverse-referenced tours
 
 **Modified files:**
-- `package.json` + `pnpm-lock.yaml` — add `leaflet`, `react-leaflet`, `@types/leaflet`
+- `package.json` + `pnpm-lock.yaml` — add `maplibre-gl`, `react-map-gl`
 - `src/sanity/schemas/documents/destination.ts` — add optional `coordinates` geopoint field
 - `src/types/sanity.ts` — extend `Destination` interface with `coordinates?`
 - `scripts/seed/data/destinations.ts` — add `coordinates`, `story`, `gallery` for all 5 destinations
@@ -43,43 +44,42 @@
 
 ---
 
-## Task 1: Install Leaflet dependencies
+## Task 1: Install MapLibre GL dependencies
 
 **Files:** `package.json`, `pnpm-lock.yaml`
 
-- [ ] **Step 1: Resolve react-leaflet version**
+- [ ] **Step 1: Verify React 19 compatibility**
 
 ```bash
 cd /Users/temuulen/Development/Amuun
-pnpm view react-leaflet versions --json | tail -20
-pnpm view react-leaflet peerDependencies
+pnpm view react-map-gl version
+pnpm view react-map-gl peerDependencies
+pnpm view maplibre-gl version
 ```
 
-Look for the latest version whose `peerDependencies.react` accepts `^19`. As of writing, `react-leaflet@5` (or `4.2.x` with overrides) is the candidate. If only `4.x` is available and it requires `react@^18`, prefer raw `leaflet` and write a small `useEffect`-based wrapper instead. Pick one path and continue.
+Expected: `react-map-gl` 7.x or newer (peer deps include `react@>=18`); `maplibre-gl` 4.x or newer. If a peer-dep warning appears for React 19 specifically, install with `--allow-build=react-map-gl` or document the warning and proceed (react-map-gl 7.1+ is React-19-safe at runtime).
 
 - [ ] **Step 2: Install packages**
 
 ```bash
-pnpm add leaflet react-leaflet
-pnpm add -D @types/leaflet
+pnpm add maplibre-gl react-map-gl
 ```
 
-If raw-leaflet path was chosen in Step 1, skip `react-leaflet` and proceed with just `leaflet` + `@types/leaflet`.
+`react-map-gl` provides bindings for both Mapbox and MapLibre. Import from `react-map-gl/maplibre` to get the MapLibre-flavored components without pulling in any Mapbox proprietary dependency.
 
 - [ ] **Step 3: Verify install**
 
 ```bash
-pnpm list leaflet @types/leaflet
-pnpm list react-leaflet 2>/dev/null || true
+pnpm list maplibre-gl react-map-gl
 ```
 
-Expected: resolved versions printed for `leaflet` and `@types/leaflet`. `react-leaflet` only if installed.
+Expected: resolved versions printed for both packages.
 
 - [ ] **Step 4: Commit**
 
 ```bash
 git add package.json pnpm-lock.yaml
-git commit -m "chore(deps): add leaflet for destinations map"
+git commit -m "chore(deps): add maplibre-gl and react-map-gl for destinations map"
 ```
 
 ---
@@ -342,19 +342,37 @@ git commit -m "feat(i18n): add destinations namespace for en/ko/mn"
 
 ---
 
-## Task 6: Build shared `LeafletMap` wrapper + client implementation
+## Task 6: Build shared `MaplibreMap` wrapper + client implementation
 
-**Files:** `src/components/shared/leaflet-map.tsx`, `src/components/shared/leaflet-map.client.tsx`
+**Files:** `src/components/shared/maplibre-map.tsx`, `src/components/shared/maplibre-map.client.tsx`, `src/styles/maplibre-style.ts`
 
-- [ ] **Step 1: Create the shared types**
+- [ ] **Step 1: Create the style module**
 
-Create `src/components/shared/leaflet-map.tsx`:
+Create `src/styles/maplibre-style.ts`:
+
+```typescript
+export const MAPLIBRE_STYLE_LIGHT =
+  'https://api.protomaps.com/styles/v5/light/en.json?key=demo';
+
+export const MAPLIBRE_STYLE_DARK =
+  'https://api.protomaps.com/styles/v5/dark/en.json?key=demo';
+
+export const BRAND_PIN_COLOR = '#D4A23A';
+export const BRAND_PIN_RING_COLOR = 'rgba(212,162,58,0.25)';
+export const BRAND_PIN_BORDER_COLOR = '#0B0D10';
+```
+
+The `?key=demo` query param uses Protomaps' free public demo tiles. For production volume, swap the key for a paid Protomaps key or self-host `.pmtiles` on Vercel and point at that URL. Style URLs return JSON; MapLibre fetches tiles automatically from the URLs declared inside.
+
+- [ ] **Step 2: Create the shared wrapper**
+
+Create `src/components/shared/maplibre-map.tsx`:
 
 ```typescript
 import dynamic from 'next/dynamic';
 import type { ComponentType } from 'react';
 
-export interface LeafletMapPin {
+export interface MaplibrePin {
   id: string;
   lat: number;
   lng: number;
@@ -363,19 +381,20 @@ export interface LeafletMapPin {
   onClick?: () => void;
 }
 
-export interface LeafletMapProps {
-  pins: LeafletMapPin[];
+export interface MaplibreMapProps {
+  pins: MaplibrePin[];
   center: [number, number];
   zoom: number;
   height: number;
-  tileVariant?: 'positron' | 'positron-no-labels' | 'dark-matter';
+  styleUrl?: string;
   ariaListLabel: string;
   loadFailedMessage: string;
+  interactive?: boolean;
   className?: string;
 }
 
-const LeafletMapClient = dynamic<LeafletMapProps>(
-  () => import('./leaflet-map.client').then((m) => m.LeafletMapClient),
+const MaplibreMapClient = dynamic<MaplibreMapProps>(
+  () => import('./maplibre-map.client').then((m) => m.MaplibreMapClient),
   {
     ssr: false,
     loading: () => (
@@ -389,61 +408,36 @@ const LeafletMapClient = dynamic<LeafletMapProps>(
       </div>
     ),
   },
-) as ComponentType<LeafletMapProps>;
+) as ComponentType<MaplibreMapProps>;
 
-export function LeafletMap(props: LeafletMapProps) {
-  return <LeafletMapClient {...props} />;
+export function MaplibreMap(props: MaplibreMapProps) {
+  return <MaplibreMapClient {...props} />;
 }
 ```
 
-- [ ] **Step 2: Create the client implementation**
+- [ ] **Step 3: Create the client implementation**
 
-Create `src/components/shared/leaflet-map.client.tsx`. The exact React API depends on the version chosen in Task 1.
-
-If `react-leaflet` is installed and React-19-compatible:
+Create `src/components/shared/maplibre-map.client.tsx`:
 
 ```typescript
 'use client';
 
-import { useEffect, useRef } from 'react';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import type { LeafletMapProps } from './leaflet-map';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { Map, Marker, NavigationControl } from 'react-map-gl/maplibre';
+import { MAPLIBRE_STYLE_LIGHT, BRAND_PIN_COLOR, BRAND_PIN_RING_COLOR, BRAND_PIN_BORDER_COLOR } from '@/styles/maplibre-style';
+import type { MaplibreMapProps } from './maplibre-map';
 
-const TILE_URLS: Record<NonNullable<LeafletMapProps['tileVariant']>, { url: string; attribution: string }> = {
-  'positron': {
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-  },
-  'positron-no-labels': {
-    url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-  },
-  'dark-matter': {
-    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-  },
-};
-
-const goldDot = L.divIcon({
-  className: 'amuun-pin',
-  html: '<span style="display:block;width:14px;height:14px;border-radius:9999px;background:#D4A23A;border:2px solid #0B0D10;box-shadow:0 0 0 3px rgba(212,162,58,0.25);"></span>',
-  iconSize: [14, 14],
-  iconAnchor: [7, 7],
-});
-
-export function LeafletMapClient({
+export function MaplibreMapClient({
   pins,
   center,
   zoom,
   height,
-  tileVariant = 'positron',
+  styleUrl = MAPLIBRE_STYLE_LIGHT,
   ariaListLabel,
   loadFailedMessage,
+  interactive = true,
   className,
-}: LeafletMapProps) {
-  const tile = TILE_URLS[tileVariant];
+}: MaplibreMapProps) {
   return (
     <div className={className}>
       <ul className="sr-only" aria-label={ariaListLabel}>
@@ -453,50 +447,61 @@ export function LeafletMapClient({
           </li>
         ))}
       </ul>
-      <MapContainer
-        center={center}
-        zoom={zoom}
-        scrollWheelZoom={false}
-        keyboard
-        style={{ height, width: '100%' }}
+      <Map
+        initialViewState={{ longitude: center[1], latitude: center[0], zoom }}
+        style={{ width: '100%', height }}
+        mapStyle={styleUrl}
+        interactive={interactive}
+        attributionControl={{ compact: true }}
       >
-        <TileLayer url={tile.url} attribution={tile.attribution} />
+        {interactive ? <NavigationControl position="top-right" showCompass={false} /> : null}
         {pins.map((pin) => (
           <Marker
             key={pin.id}
-            position={[pin.lat, pin.lng]}
-            icon={goldDot}
-            eventHandlers={pin.onClick ? { click: pin.onClick } : undefined}
-            keyboard
+            longitude={pin.lng}
+            latitude={pin.lat}
+            anchor="center"
+            onClick={(e) => {
+              e.originalEvent.stopPropagation();
+              pin.onClick?.();
+            }}
           >
-            <Popup>
-              <span>{pin.label}</span>
-            </Popup>
+            <button
+              type="button"
+              aria-label={pin.label}
+              onClick={pin.onClick}
+              className="block h-3.5 w-3.5 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0B0D10]"
+              style={{
+                background: BRAND_PIN_COLOR,
+                border: `2px solid ${BRAND_PIN_BORDER_COLOR}`,
+                boxShadow: `0 0 0 3px ${BRAND_PIN_RING_COLOR}`,
+              }}
+            />
           </Marker>
         ))}
-      </MapContainer>
+      </Map>
     </div>
   );
 }
 ```
 
-If `react-leaflet` was skipped, write a minimal `useEffect`-based wrapper that creates a `L.map(...)`, adds a `L.tileLayer(tile.url, ...)`, and `L.marker([lat, lng], { icon: goldDot }).addTo(map).bindPopup(label)` for each pin. Cleanup with `map.remove()` in the effect's return.
+The `Map` component in `react-map-gl/maplibre` accepts `mapStyle` as a URL string or a JSON style object. Style URL points to Protomaps which returns tiles from their CDN with no API key for the demo plan.
 
 `loadFailedMessage` is referenced by the SR fallback list label only when the map fails entirely; the dynamic-import loading state already handles in-flight loading. Keep the prop for future error-boundary use but you may omit rendering it directly in this task.
 
-- [ ] **Step 3: Typecheck and lint**
+- [ ] **Step 4: Typecheck and lint**
 
 ```bash
 pnpm typecheck && pnpm lint
 ```
 
-Expected: clean.
+Expected: clean. If TypeScript complains about `react-map-gl/maplibre` not exporting `Map`, install `@types/mapbox-gl` (a transitive type provider) or check the `react-map-gl` README for the current import path.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
-git add src/components/shared/leaflet-map.tsx src/components/shared/leaflet-map.client.tsx
-git commit -m "feat(shared): add Leaflet map wrapper with SR fallback list"
+git add src/components/shared/maplibre-map.tsx src/components/shared/maplibre-map.client.tsx src/styles/maplibre-style.ts
+git commit -m "feat(shared): add MaplibreMap wrapper with SR fallback list"
 ```
 
 ---
@@ -597,10 +602,10 @@ Create `src/components/destination/destinations-overview-map.tsx`:
 'use client';
 
 import { useCallback } from 'react';
-import { LeafletMap, type LeafletMapPin } from '@/components/shared/leaflet-map';
+import { MaplibreMap, type MaplibrePin } from '@/components/shared/maplibre-map';
 
 interface DestinationsOverviewMapProps {
-  pins: LeafletMapPin[];
+  pins: MaplibrePin[];
   ariaListLabel: string;
   loadFailedMessage: string;
 }
@@ -610,7 +615,7 @@ export function DestinationsOverviewMap({
   ariaListLabel,
   loadFailedMessage,
 }: DestinationsOverviewMapProps) {
-  const enrichedPins: LeafletMapPin[] = pins.map((pin) => ({
+  const enrichedPins: MaplibrePin[] = pins.map((pin) => ({
     ...pin,
     onClick: () => {
       const target = document.getElementById(`region-${pin.id}`);
@@ -623,12 +628,11 @@ export function DestinationsOverviewMap({
   return (
     <section className="relative bg-[#0B0D10] px-[7vw] py-[6vh]">
       <div className="mx-auto max-w-6xl">
-        <LeafletMap
+        <MaplibreMap
           pins={enrichedPins}
           center={[46.8, 103.8]}
           zoom={5}
           height={600}
-          tileVariant="positron"
           ariaListLabel={ariaListLabel}
           loadFailedMessage={loadFailedMessage}
           className="overflow-hidden rounded-2xl border border-[#1E2128]"
@@ -950,7 +954,7 @@ import { DestinationsHero } from '@/components/destination/destinations-hero';
 import { DestinationsOverviewMap } from '@/components/destination/destinations-overview-map';
 import { DestinationRegionSection, type RegionSectionData } from '@/components/destination/destination-region-section';
 import { DestinationsCtaBand } from '@/components/destination/destinations-cta-band';
-import type { LeafletMapPin } from '@/components/shared/leaflet-map';
+import type { MaplibrePin } from '@/components/shared/maplibre-map';
 import type { Destination } from '@/types/sanity';
 
 const REGION_ORDER = ['central', 'gobi', 'western', 'northern', 'terelj'] as const;
@@ -1000,7 +1004,7 @@ export default async function DestinationsListingPage({
     if (dest.region in grouped) grouped[dest.region as RegionSlug].push(dest);
   }
 
-  const pins: LeafletMapPin[] = destinations
+  const pins: MaplibrePin[] = destinations
     .filter((d) => d.coordinates)
     .map((d) => ({
       id: d.region,
@@ -1426,7 +1430,7 @@ Create `src/components/destination/destination-location-map.tsx`:
 ```typescript
 'use client';
 
-import { LeafletMap, type LeafletMapPin } from '@/components/shared/leaflet-map';
+import { MaplibreMap, type MaplibrePin } from '@/components/shared/maplibre-map';
 
 interface DestinationLocationMapProps {
   lat: number;
@@ -1445,20 +1449,19 @@ export function DestinationLocationMap({
   ariaListLabel,
   loadFailedMessage,
 }: DestinationLocationMapProps) {
-  const pins: LeafletMapPin[] = [{ id: 'self', lat, lng, label }];
+  const pins: MaplibrePin[] = [{ id: 'self', lat, lng, label }];
 
   return (
     <section className="border-t border-[#1E2128] bg-[#0B0D10] px-[7vw] py-[14vh]">
       <div className="mx-auto max-w-6xl">
         <h2 className="eyebrow text-[#D4A23A]">{heading}</h2>
         <div className="mt-10">
-          <LeafletMap
+          <MaplibreMap
             pins={pins}
             center={[lat, lng]}
             zoom={6}
             height={400}
-            tileVariant="positron"
-            ariaListLabel={ariaListLabel}
+              ariaListLabel={ariaListLabel}
             loadFailedMessage={loadFailedMessage}
             className="overflow-hidden rounded-2xl border border-[#1E2128]"
           />
@@ -1907,5 +1910,5 @@ git push origin main
 - **Codebase patterns:** The site uses dark+gold (`#0B0D10` / `#D4A23A`), italic+bold typography splits, and `7vw` horizontal padding. Match these exactly — do not introduce new colors or spacing tokens.
 - **Locale resolution:** Always use `resolveLocaleField` for `LocaleString`/`LocaleText` and pass `locale` through; never hard-code English fallbacks visible in UI.
 - **Sanity fetcher:** `sanityFetch` accepts `(query, params, options)` where `options.tags` controls `revalidateTag` invalidation. Always tag with `'destination'` (and the slug for detail).
-- **Server vs client:** Default to server. Only mark `'use client'` when GSAP, `useState`, or browser APIs are required. The map components must be client because Leaflet touches `window`.
+- **Server vs client:** Default to server. Only mark `'use client'` when GSAP, `useState`, or browser APIs are required. The map components must be client because MapLibre touches `window`.
 - **Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`). The user has globally disabled Claude attribution — do not add `Co-Authored-By: Claude ...` lines to commits.

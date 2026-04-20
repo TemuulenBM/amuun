@@ -104,6 +104,7 @@ export interface Destination extends BaseDocument {
   subtitle?: LocaleString;
   story?: LocaleBlockContent;
   region: 'central' | 'gobi' | 'western' | 'northern' | 'terelj';
+  coordinates?: Geopoint;
   bestTime?: LocaleString;
   highlights?: LocaleString[];
   heroImage: ImageWithAlt;

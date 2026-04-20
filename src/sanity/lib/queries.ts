@@ -32,7 +32,7 @@ export const tourBySlugQuery = /* groq */ `
 
 export const allDestinationsQuery = /* groq */ `
 *[_type == "destination" && defined(slug.current)] | order(region asc) {
-  _id, _type, title, slug, subtitle, region, heroImage, bestTime, highlights
+  _id, _type, title, slug, subtitle, region, heroImage, bestTime, highlights, coordinates
 }
 `;
 
