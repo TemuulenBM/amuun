@@ -1,2 +1,2 @@
 import { StubPage } from '@/components/sections/stub-page';
-export default function Page() { return <StubPage title="Privacy Policy" />; }
+export default function Page() { return <StubPage titleKey="privacy" />; }

@@ -1,93 +1,101 @@
 {
   "brand": {
     "name": "AMUUN",
-    "tagline": "Private expeditions across the world's last wild horizon."
+    "tagline": "세상에 마지막으로 남은 야생의 지평선을 가로지르는 프라이빗 원정."
   },
   "nav": {
-    "expeditions": "Expeditions",
-    "destinations": "Destinations",
-    "about": "About",
-    "journal": "Journal",
-    "contact": "Contact",
-    "menu": "Menu"
+    "expeditions": "탐험",
+    "destinations": "여행지",
+    "about": "소개",
+    "journal": "저널",
+    "contact": "문의",
+    "menu": "메뉴",
+    "customTrip": "맞춤 여정",
+    "privacy": "개인정보 처리방침",
+    "terms": "이용약관"
   },
   "hero": {
-    "line1": "MONGOLIA",
-    "line2": "UNFILTERED",
-    "left": "Expeditions / Treks / Photography",
-    "right": "Scroll to Explore"
+    "line1": "몽골",
+    "line2": "있는 그대로",
+    "left": "탐험 / 트레킹 / 사진",
+    "right": "아래로 스크롤"
   },
   "experiences": {
     "gobi": {
-      "eyebrow": "Gobi / Steppe",
-      "headline": "Cross the Infinite",
-      "body": "Drive ancient herder trails across the Gobi's silent expanse—where every dune line looks like a calligraphy stroke.",
-      "cta": "Request the itinerary"
+      "eyebrow": "고비 / 초원",
+      "headline": "끝없는 땅을 가로지르다",
+      "body": "수백 년 동안 유목민이 다져온 길을 따라 고요한 고비를 달립니다. 능선마다 붓으로 그은 서예 한 획처럼 흐르는 풍경 속으로 들어갑니다.",
+      "cta": "일정 받아보기"
     },
     "taiga": {
-      "eyebrow": "Northern Taiga",
-      "headline": "Meet the Reindeer People",
-      "body": "Spend time with the Tsaatan—one of the last nomadic groups living among wild reindeer in the Siberian-edge forest.",
-      "cta": "Read their story"
+      "eyebrow": "북쪽 타이가",
+      "headline": "순록과 함께 사는 사람들",
+      "body": "시베리아 접경 숲에서 야생 순록과 어울려 살아가는 마지막 유목 부족, 차탄 사람들과 며칠을 함께 보냅니다.",
+      "cta": "이야기 읽기"
     },
     "dunes": {
-      "eyebrow": "Khongoryn Els",
-      "headline": "Climb the Singing Dunes",
-      "body": "Ascend 300-meter dunes that hum in the wind, then ride camels at sunset along a ribbon of orange and violet.",
-      "cta": "See the route"
+      "eyebrow": "홍고린 엘스",
+      "headline": "노래하는 사구를 오르다",
+      "body": "바람에 낮은 울음 같은 소리를 내는 300미터 사구를 오른 뒤, 해 질 녘 주황과 보라가 번지는 띠 위를 낙타 등에서 바라봅니다.",
+      "cta": "경로 보기"
     },
     "canyon": {
-      "eyebrow": "Khermen Tsav",
-      "headline": "Descend into the Canyon",
-      "body": "Hike through the 'Mongolian Grand Canyon'—a labyrinth of red cliffs, fossil beds, and silence so deep you can hear the earth cool.",
-      "cta": "Plan a trek"
+      "eyebrow": "헤르멘 차브",
+      "headline": "협곡 속으로 내려가다",
+      "body": "'몽골의 그랜드 캐니언'을 걷습니다. 붉은 절벽과 화석층이 이어지고, 땅이 식는 소리까지 들릴 만큼 깊은 정적이 내려앉는 길.",
+      "cta": "트레킹 계획하기"
     },
     "altai": {
-      "eyebrow": "Altai Tavan Bogd",
-      "headline": "Trek the Five Holy Peaks",
-      "body": "Climb Mongolia's highest summits, walk on ancient glaciers, and meet Kazakh eagle hunters in the high pastures.",
-      "cta": "View expedition dates"
+      "eyebrow": "알타이 타반 복드",
+      "headline": "다섯 성스러운 봉우리를 걷다",
+      "body": "몽골 최고봉을 오르고, 수천 년 된 빙하 위를 걸으며, 고산 초원에서 독수리와 함께 사냥하는 카자흐 매잡이들을 만납니다.",
+      "cta": "원정 일정 보기"
     },
     "volcano": {
-      "eyebrow": "Khorgo Lake",
-      "headline": "Camp by the White Lake",
-      "body": "Paddle crystal water inside an extinct volcano, then sleep under stars that feel close enough to touch.",
-      "cta": "Check availability"
+      "eyebrow": "호르고 호수",
+      "headline": "하얀 호수 곁에서 야영하다",
+      "body": "꺼진 화산의 품 안에 담긴 맑은 물 위를 노 저어 가고, 손을 뻗으면 닿을 듯 가까운 별 아래에서 하룻밤을 보냅니다.",
+      "cta": "예약 확인하기"
     },
     "karakorum": {
-      "eyebrow": "Orkhon Valley",
-      "headline": "Walk the Ancient Capital",
-      "body": "Stand where Genghis Khan built his power base—visit Erdene Zuu, stone turtles, and the ruins that changed history.",
-      "cta": "Build your journey"
+      "eyebrow": "오르혼 계곡",
+      "headline": "고대의 수도를 걷다",
+      "body": "칭기즈칸이 제국의 중심을 세운 자리에 섭니다. 에르덴 주 사원, 돌거북, 역사를 바꾼 폐허가 차례로 이어지는 여정입니다.",
+      "cta": "여정 설계하기"
     }
   },
   "contact": {
-    "heading_1": "Begin Your",
-    "heading_2": "Journey",
-    "intro": "Tell us what you're drawn to—desert, mountains, culture, or all of it. We'll design a private expedition that matches your pace.",
-    "emailLabel": "Email",
+    "heading_1": "여정의",
+    "heading_2": "시작",
+    "intro": "어떤 풍경에 마음이 끌리시나요. 사막이든, 산이든, 문화든, 그 모든 것이든. 당신의 호흡에 맞춘 프라이빗 원정을 설계합니다.",
+    "emailLabel": "이메일",
     "emailValue": "hello@amuun.travel",
-    "responseLabel": "Response",
-    "responseValue": "1–2 business days",
+    "responseLabel": "회신",
+    "responseValue": "영업일 기준 1~2일",
     "form": {
-      "name": "Name",
-      "namePlaceholder": "Your name",
-      "email": "Email",
+      "name": "이름",
+      "namePlaceholder": "성함을 입력해 주세요",
+      "email": "이메일",
       "emailPlaceholder": "your@email.com",
-      "interest": "Interest",
-      "selectExpedition": "Select an expedition",
-      "customJourney": "Custom Journey",
-      "message": "Message",
-      "messagePlaceholder": "Tell us about your dream journey...",
-      "submit": "Request a Call",
-      "downloadItinerary": "Download Itinerary PDF"
+      "interest": "관심 있는 여정",
+      "selectExpedition": "원정을 선택해 주세요",
+      "customJourney": "맞춤 여정",
+      "message": "메시지",
+      "messagePlaceholder": "꿈꾸시는 여정을 들려주세요...",
+      "submit": "상담 신청하기",
+      "downloadItinerary": "여정 PDF 내려받기"
     },
     "footer": {
-      "copyright": "© 2026 Amuun Expeditions. All rights reserved."
+      "copyright": "© 2026 Amuun Expeditions. 모든 권리 보유."
     }
   },
   "stub": {
-    "comingSoon": "Coming soon",
-    "backHome": "Back to home"
+    "comingSoon": "곧 공개됩니다",
+    "backHome": "처음으로"
+  },
+  "errors": {
+    "notFoundTitle": "초원에서 길을 잃었습니다",
+    "errorTitle": "대상이 잠시 멈췄습니다",
+    "retry": "다시 시도"
   }
 }

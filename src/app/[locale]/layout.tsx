@@ -16,7 +16,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'Amuun — Private expeditions across Mongolia',
+  title: 'Amuun · Private expeditions across Mongolia',
 };
 
 export default async function LocaleLayout({

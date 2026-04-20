@@ -1,2 +1,2 @@
 import { StubPage } from '@/components/sections/stub-page';
-export default function Page() { return <StubPage title="Custom Journey" />; }
+export default function Page() { return <StubPage titleKey="customTrip" />; }

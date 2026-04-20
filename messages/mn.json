@@ -1,93 +1,101 @@
 {
   "brand": {
     "name": "AMUUN",
-    "tagline": "Private expeditions across the world's last wild horizon."
+    "tagline": "Дэлхийн сүүлчийн зэрлэг хязгаарыг туулах хаалттай аялал."
   },
   "nav": {
-    "expeditions": "Expeditions",
-    "destinations": "Destinations",
-    "about": "About",
-    "journal": "Journal",
-    "contact": "Contact",
-    "menu": "Menu"
+    "expeditions": "Аялал",
+    "destinations": "Чиглэл",
+    "about": "Бидний тухай",
+    "journal": "Тэмдэглэл",
+    "contact": "Холбогдох",
+    "menu": "Цэс",
+    "customTrip": "Захиалгат аялал",
+    "privacy": "Нууцлалын бодлого",
+    "terms": "Үйлчилгээний нөхцөл"
   },
   "hero": {
-    "line1": "MONGOLIA",
-    "line2": "UNFILTERED",
-    "left": "Expeditions / Treks / Photography",
-    "right": "Scroll to Explore"
+    "line1": "МОНГОЛ",
+    "line2": "ЖИНХЭНЭЭРЭЭ",
+    "left": "Аялал / Явган аялал / Гэрэл зураг",
+    "right": "Доош гүйлгэнэ үү"
   },
   "experiences": {
     "gobi": {
-      "eyebrow": "Gobi / Steppe",
-      "headline": "Cross the Infinite",
-      "body": "Drive ancient herder trails across the Gobi's silent expanse—where every dune line looks like a calligraphy stroke.",
-      "cta": "Request the itinerary"
+      "eyebrow": "Говь / Тал нутаг",
+      "headline": "Хязгааргүй уудам тал",
+      "body": "Олон зууны малчдын мөр дагалдан Говийн нам гүм уудам нутгаар аялна. Манхан бүрийн шугам нь бийр чирсэн уран бичиг мэт урсах газар.",
+      "cta": "Хөтөлбөр авах"
     },
     "taiga": {
-      "eyebrow": "Northern Taiga",
-      "headline": "Meet the Reindeer People",
-      "body": "Spend time with the Tsaatan—one of the last nomadic groups living among wild reindeer in the Siberian-edge forest.",
-      "cta": "Read their story"
+      "eyebrow": "Хойд тайга",
+      "headline": "Цаатан иргэдтэй уулзах",
+      "body": "Сибирийн захын ойд зэрлэг цаа бугатай зэрэгцэн амьдарч буй сүүлчийн нүүдэлчдийн нэг, цаатан иргэдтэй хэдэн өдрийг хамт өнгөрүүлнэ.",
+      "cta": "Тэдний түүх"
     },
     "dunes": {
-      "eyebrow": "Khongoryn Els",
-      "headline": "Climb the Singing Dunes",
-      "body": "Ascend 300-meter dunes that hum in the wind, then ride camels at sunset along a ribbon of orange and violet.",
-      "cta": "See the route"
+      "eyebrow": "Хонгорын элс",
+      "headline": "Дуулдаг манханд авирах",
+      "body": "Салхинд дуулах мэт чимээ тавьдаг 300 метр өндөр манхан руу авирч, нар жаргах үеэр улаан ягаан туяа дундуур тэмээн дээр зугаална.",
+      "cta": "Замыг үзэх"
     },
     "canyon": {
-      "eyebrow": "Khermen Tsav",
-      "headline": "Descend into the Canyon",
-      "body": "Hike through the 'Mongolian Grand Canyon'—a labyrinth of red cliffs, fossil beds, and silence so deep you can hear the earth cool.",
-      "cta": "Plan a trek"
+      "eyebrow": "Хэрмэн цав",
+      "headline": "Хавцал руу уруудах",
+      "body": "‘Монголын Гранд каньон’-оор явган аялна. Улаан хадан хаяавч, чулуужсан ясан үлдэгдэл, газар хөрж буйг сонсож болохуйц гүн нам гүм бий.",
+      "cta": "Аяллаа төлөвлөх"
     },
     "altai": {
-      "eyebrow": "Altai Tavan Bogd",
-      "headline": "Trek the Five Holy Peaks",
-      "body": "Climb Mongolia's highest summits, walk on ancient glaciers, and meet Kazakh eagle hunters in the high pastures.",
-      "cta": "View expedition dates"
+      "eyebrow": "Алтай Таван Богд",
+      "headline": "Таван ариун оргилыг туулах",
+      "body": "Монголын хамгийн өндөр оргилд авирч, эртний мөсөн гол дээгүүр алхаж, өндөр нутагт бүргэд сургадаг казах анчидтай уулзана.",
+      "cta": "Аяллын хуваарь"
     },
     "volcano": {
-      "eyebrow": "Khorgo Lake",
-      "headline": "Camp by the White Lake",
-      "body": "Paddle crystal water inside an extinct volcano, then sleep under stars that feel close enough to touch.",
-      "cta": "Check availability"
+      "eyebrow": "Хорго нуур",
+      "headline": "Цагаан нуурын хөвөөнд буудаллах",
+      "body": "Унтарсан галт уулын тэвэрт цэлмэг устай нуурын дээгүүр сэлүүрдэж, гараа сунган хүрмээр ойрхон оддын дор шөнийг өнгөрүүлнэ.",
+      "cta": "Огноо шалгах"
     },
     "karakorum": {
-      "eyebrow": "Orkhon Valley",
-      "headline": "Walk the Ancient Capital",
-      "body": "Stand where Genghis Khan built his power base—visit Erdene Zuu, stone turtles, and the ruins that changed history.",
-      "cta": "Build your journey"
+      "eyebrow": "Орхоны хөндий",
+      "headline": "Эртний нийслэлд зочлох",
+      "body": "Чингис хаан эзэнт гүрнийхээ төвийг босгосон тэр газар зогсох сан. Эрдэнэ зуу хийд, чулуун яст мэлхий, түүхийг өөрчилсөн эртний балгас нэг нэгнийхээ дараа үргэлжилнэ.",
+      "cta": "Аялал зохиох"
     }
   },
   "contact": {
-    "heading_1": "Begin Your",
-    "heading_2": "Journey",
-    "intro": "Tell us what you're drawn to—desert, mountains, culture, or all of it. We'll design a private expedition that matches your pace.",
-    "emailLabel": "Email",
+    "heading_1": "Аяллаа",
+    "heading_2": "эхлүүлэх",
+    "intro": "Таныг юу татаж байгааг бидэнд хэлээрэй. Цөл, уул, соёл, эсвэл бүгдийг ч юм уу. Таны өөрийн хэмнэлд тохирсон хаалттай аяллыг зохион байгуулъя.",
+    "emailLabel": "Имэйл",
     "emailValue": "hello@amuun.travel",
-    "responseLabel": "Response",
-    "responseValue": "1–2 business days",
+    "responseLabel": "Хариу",
+    "responseValue": "1-2 ажлын өдөрт",
     "form": {
-      "name": "Name",
-      "namePlaceholder": "Your name",
-      "email": "Email",
+      "name": "Нэр",
+      "namePlaceholder": "Нэрээ бичнэ үү",
+      "email": "Имэйл",
       "emailPlaceholder": "your@email.com",
-      "interest": "Interest",
-      "selectExpedition": "Select an expedition",
-      "customJourney": "Custom Journey",
-      "message": "Message",
-      "messagePlaceholder": "Tell us about your dream journey...",
-      "submit": "Request a Call",
-      "downloadItinerary": "Download Itinerary PDF"
+      "interest": "Сонирхол",
+      "selectExpedition": "Аяллаа сонгоно уу",
+      "customJourney": "Хувийн аялал",
+      "message": "Зурвас",
+      "messagePlaceholder": "Мөрөөдлийн аяллаа бидэнд ярьж өгнө үү...",
+      "submit": "Холбогдохыг хүсэх",
+      "downloadItinerary": "Хөтөлбөр PDF татаж авах"
     },
     "footer": {
-      "copyright": "© 2026 Amuun Expeditions. All rights reserved."
+      "copyright": "© 2026 Amuun Expeditions. Бүх эрх хуулиар хамгаалагдсан."
     }
   },
   "stub": {
-    "comingSoon": "Coming soon",
-    "backHome": "Back to home"
+    "comingSoon": "Удахгүй",
+    "backHome": "Нүүр хуудас руу"
+  },
+  "errors": {
+    "notFoundTitle": "Талд төөрлөө",
+    "errorTitle": "Аян хэсэг зогсоов",
+    "retry": "Дахин оролдох"
   }
 }
