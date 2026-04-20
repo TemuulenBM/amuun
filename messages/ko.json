@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "AMUUN",
-    "tagline": "세상에 마지막으로 남은 야생의 지평선을 가로지르는 프라이빗 원정."
+    "tagline": "당신 한 사람을 위한, 세상의 마지막 야생."
   },
   "nav": {
     "expeditions": "탐험",
@@ -16,86 +16,86 @@
   },
   "hero": {
     "line1": "몽골",
-    "line2": "있는 그대로",
-    "left": "탐험 / 트레킹 / 사진",
-    "right": "아래로 스크롤"
+    "line2": "광야",
+    "left": "여정 / 발자국 / 빛",
+    "right": "아래로"
   },
   "experiences": {
     "gobi": {
-      "eyebrow": "고비 / 초원",
-      "headline": "끝없는 땅을 가로지르다",
-      "body": "수백 년 동안 유목민이 다져온 길을 따라 고요한 고비를 달립니다. 능선마다 붓으로 그은 서예 한 획처럼 흐르는 풍경 속으로 들어갑니다.",
-      "cta": "일정 받아보기"
+      "eyebrow": "고비",
+      "headline": "적막의 한가운데",
+      "body": "유목민의 오래된 길을 따라 고비의 심장으로 들어간다. 모래언덕은 먹의 한 획처럼 흐른다.",
+      "cta": "길을 듣다"
     },
     "taiga": {
-      "eyebrow": "북쪽 타이가",
-      "headline": "순록과 함께 사는 사람들",
-      "body": "시베리아 접경 숲에서 야생 순록과 어울려 살아가는 마지막 유목 부족, 차탄 사람들과 며칠을 함께 보냅니다.",
-      "cta": "이야기 읽기"
+      "eyebrow": "타이가",
+      "headline": "눈 아래, 순록의 숨",
+      "body": "차탄, 타이가에 마지막으로 남은 유목민. 게르 안 뜨거운 차 한 잔, 그리고 별이 가까운 밤.",
+      "cta": "그들을 만나다"
     },
     "dunes": {
       "eyebrow": "홍고린 엘스",
-      "headline": "노래하는 사구를 오르다",
-      "body": "바람에 낮은 울음 같은 소리를 내는 300미터 사구를 오른 뒤, 해 질 녘 주황과 보라가 번지는 띠 위를 낙타 등에서 바라봅니다.",
-      "cta": "경로 보기"
+      "headline": "모래가 노래할 때",
+      "body": "300미터 사구가 바람 속에서 낮게 운다. 낙타 등 위로 노을이 내려온다.",
+      "cta": "사막으로"
     },
     "canyon": {
       "eyebrow": "헤르멘 차브",
-      "headline": "협곡 속으로 내려가다",
-      "body": "'몽골의 그랜드 캐니언'을 걷습니다. 붉은 절벽과 화석층이 이어지고, 땅이 식는 소리까지 들릴 만큼 깊은 정적이 내려앉는 길.",
-      "cta": "트레킹 계획하기"
+      "headline": "땅의 뼛속으로",
+      "body": "붉은 절벽, 화석의 시간, 깊은 정적. 이 땅의 고요는 살을 문다고, 이곳 사람들이 말한다.",
+      "cta": "협곡으로 내려가다"
     },
     "altai": {
       "eyebrow": "알타이 타반 복드",
-      "headline": "다섯 성스러운 봉우리를 걷다",
-      "body": "몽골 최고봉을 오르고, 수천 년 된 빙하 위를 걸으며, 고산 초원에서 독수리와 함께 사냥하는 카자흐 매잡이들을 만납니다.",
-      "cta": "원정 일정 보기"
+      "headline": "다섯 성산, 영원의 얼음",
+      "body": "이 나라의 가장 높은 봉우리, 수천 년의 빙하. 독수리를 든 카자흐 사냥꾼의 게르에서 삶은 고기 한 점.",
+      "cta": "정상으로"
     },
     "volcano": {
-      "eyebrow": "호르고 호수",
-      "headline": "하얀 호수 곁에서 야영하다",
-      "body": "꺼진 화산의 품 안에 담긴 맑은 물 위를 노 저어 가고, 손을 뻗으면 닿을 듯 가까운 별 아래에서 하룻밤을 보냅니다.",
-      "cta": "예약 확인하기"
+      "eyebrow": "호르고",
+      "headline": "꺼진 불의 심장에서",
+      "body": "사라진 화산의 품 안에 고인 맑은 물. 밤이 오면 별은 땅까지 내려온다.",
+      "cta": "호수의 곁으로"
     },
     "karakorum": {
-      "eyebrow": "오르혼 계곡",
-      "headline": "고대의 수도를 걷다",
-      "body": "칭기즈칸이 제국의 중심을 세운 자리에 섭니다. 에르덴 주 사원, 돌거북, 역사를 바꾼 폐허가 차례로 이어지는 여정입니다.",
-      "cta": "여정 설계하기"
+      "eyebrow": "오르혼",
+      "headline": "제국이 시작된 곳",
+      "body": "에르덴 주, 돌거북, 칭기즈칸의 발자취. 고대 수도의 바람은 지금도 이곳에 머문다.",
+      "cta": "역사의 길로"
     }
   },
   "contact": {
-    "heading_1": "여정의",
+    "heading_1": "길의",
     "heading_2": "시작",
-    "intro": "어떤 풍경에 마음이 끌리시나요. 사막이든, 산이든, 문화든, 그 모든 것이든. 당신의 호흡에 맞춘 프라이빗 원정을 설계합니다.",
+    "intro": "무엇이 당신을 부르나요. 사막, 산, 역사, 혹은 그 모두. 당신의 호흡에 맞춘 단 하나의 여정을 설계합니다.",
     "emailLabel": "이메일",
     "emailValue": "hello@amuun.travel",
-    "responseLabel": "회신",
+    "responseLabel": "답변",
     "responseValue": "영업일 기준 1~2일",
     "form": {
       "name": "이름",
-      "namePlaceholder": "성함을 입력해 주세요",
+      "namePlaceholder": "성함",
       "email": "이메일",
       "emailPlaceholder": "your@email.com",
-      "interest": "관심 있는 여정",
-      "selectExpedition": "원정을 선택해 주세요",
+      "interest": "관심",
+      "selectExpedition": "여정을 선택해 주십시오",
       "customJourney": "맞춤 여정",
       "message": "메시지",
-      "messagePlaceholder": "꿈꾸시는 여정을 들려주세요...",
-      "submit": "상담 신청하기",
-      "downloadItinerary": "여정 PDF 내려받기"
+      "messagePlaceholder": "꿈꾸시는 여정을 들려주십시오...",
+      "submit": "보내기",
+      "downloadItinerary": "일정 PDF 받기"
     },
     "footer": {
       "copyright": "© 2026 Amuun Expeditions. 모든 권리 보유."
     }
   },
   "stub": {
-    "comingSoon": "곧 공개됩니다",
+    "comingSoon": "곧 공개",
     "backHome": "처음으로"
   },
   "errors": {
-    "notFoundTitle": "초원에서 길을 잃었습니다",
-    "errorTitle": "대상이 잠시 멈췄습니다",
-    "retry": "다시 시도"
+    "notFoundTitle": "길을 잃다",
+    "errorTitle": "잠시 멈춤",
+    "retry": "다시"
   }
 }
