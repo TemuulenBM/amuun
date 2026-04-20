@@ -9,6 +9,7 @@ import type { TourDetail } from '@/types/tour';
 import { Footer } from '@/components/layout/footer';
 import { TourHero } from '@/components/tour/tour-hero';
 import { TourOverview } from '@/components/tour/tour-overview';
+import { TourPricing } from '@/components/tour/tour-pricing';
 import { TourStatStrip } from '@/components/tour/tour-stat-strip';
 import { routing } from '@/i18n/routing';
 
@@ -99,6 +100,7 @@ export default async function TourDetailPage({
         destinations={tour.destinations}
         locale={locale}
       />
+      <TourPricing pricing={tour.pricing} tourSlug={tour.slug.current} locale={locale} />
       <Footer />
     </main>
   );
