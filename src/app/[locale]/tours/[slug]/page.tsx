@@ -7,6 +7,8 @@ import { urlFor } from '@/sanity/lib/image';
 import { resolveLocaleField, type Locale } from '@/lib/locale/resolve-locale-field';
 import type { TourDetail } from '@/types/tour';
 import { Footer } from '@/components/layout/footer';
+import { TourHero } from '@/components/tour/tour-hero';
+import { TourStatStrip } from '@/components/tour/tour-stat-strip';
 import { routing } from '@/i18n/routing';
 
 interface TourPageParams {
@@ -63,33 +65,33 @@ export default async function TourDetailPage({
   );
   if (!tour) notFound();
 
+  const title = resolveLocaleField(tour.title, locale) ?? '';
+  const summary = resolveLocaleField(tour.summary, locale) ?? '';
+  const heroAlt = resolveLocaleField(tour.heroImage.alt, locale) ?? title;
+  const heroUrl = urlFor(tour.heroImage).width(2000).quality(85).url();
+  const eyebrowParts = [
+    `${tour.duration} ${tour.seasons.join(' / ')}`,
+    tour.difficulty,
+  ];
+  const eyebrow = eyebrowParts.filter(Boolean).join(' · ').toUpperCase();
+
   return (
     <main className="relative bg-[#0B0D10]">
-      <section className="min-h-screen px-[7vw] pt-[20vh] pb-[10vh]">
-        <span className="eyebrow block">Tour detail skeleton</span>
-        <h1 className="mt-6 font-serif text-5xl font-semibold text-[#F7F7F5]">
-          {resolveLocaleField(tour.title, locale)}
-        </h1>
-        <p className="mt-6 max-w-xl text-[#A7ACB4]">
-          {resolveLocaleField(tour.summary, locale)}
-        </p>
-        <pre className="mt-10 overflow-auto text-xs text-[#A7ACB4]/60">
-          {JSON.stringify(
-            {
-              duration: tour.duration,
-              difficulty: tour.difficulty,
-              seasons: tour.seasons,
-              pricing: tour.pricing,
-              itineraryDays: tour.itinerary?.length ?? 0,
-              galleryCount: tour.gallery?.length ?? 0,
-              faqs: tour.faqs?.length ?? 0,
-              related: tour.relatedTours?.length ?? 0,
-            },
-            null,
-            2,
-          )}
-        </pre>
-      </section>
+      <TourHero
+        heroImageUrl={heroUrl}
+        heroImageAlt={heroAlt}
+        title={title}
+        summary={summary}
+        eyebrow={eyebrow}
+        statStrip={
+          <TourStatStrip
+            duration={tour.duration}
+            difficulty={tour.difficulty}
+            pricing={tour.pricing}
+            locale={locale}
+          />
+        }
+      />
       <Footer />
     </main>
   );
