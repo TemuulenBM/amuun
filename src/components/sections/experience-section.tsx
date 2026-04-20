@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { gsap } from '@/lib/gsap/register';
 import { Stamp } from '@/components/shared/stamp';
+import { LocaleLink } from '@/components/shared/locale-link';
 
 interface ExperienceSectionProps {
   id: string;
@@ -12,6 +13,7 @@ interface ExperienceSectionProps {
   headline: string;
   body: string;
   cta: string;
+  href: string;
   imageSrc: string;
   imageAlt: string;
   imagePosition?: 'left' | 'right';
@@ -25,6 +27,7 @@ export function ExperienceSection({
   headline,
   body,
   cta,
+  href,
   imageSrc,
   imageAlt,
   imagePosition = 'right',
@@ -72,10 +75,10 @@ export function ExperienceSection({
         {headline}
       </h2>
       <p className="body-luxury mt-8 max-w-[34vw]">{body}</p>
-      <a href="#contact" className="cta-link mt-8">
+      <LocaleLink href={href} className="cta-link mt-8">
         {cta}
         <ArrowRight size={14} />
-      </a>
+      </LocaleLink>
     </div>
   );
 
