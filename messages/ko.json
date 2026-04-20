@@ -138,6 +138,47 @@
       "copyright": "© 2026 Amuun Expeditions. 모든 권리 보유."
     }
   },
+  "destinations": {
+    "metaTitle": "여행지 · Amuun",
+    "metaDescription": "몽골의 다섯 지역 — 중앙, 고비, 서부, 북부, 테렐지. 당신의 여정이 흐를 곳을 선택하세요.",
+    "hero": {
+      "eyebrow": "지리",
+      "heading": "다섯 지역, 하나의 나라",
+      "intro": "몽골은 단일한 풍경이 아니다. 고비의 자갈 평원에서 알타이의 빙하 봉우리까지, 흡스굴의 타이가 숲에서 테렐지의 화강암 계곡까지 — 각 지역은 저마다의 날씨와 사람과 리듬을 품고 있다. 당신의 여정이 흐를 곳을 선택하세요."
+    },
+    "regions": {
+      "central": { "label": "중앙", "tagline": "제국과 오르혼 계곡" },
+      "gobi": { "label": "고비", "tagline": "화석 절벽과 노래하는 사구" },
+      "western": { "label": "서부", "tagline": "빙하와 독수리 사냥꾼" },
+      "northern": { "label": "북부", "tagline": "타이가, 순록, 그리고 짙푸른 호수" },
+      "terelj": { "label": "테렐지", "tagline": "수도에서 한 시간 거리의 화강암 절벽" }
+    },
+    "card": {
+      "bestTime": "최적 시기",
+      "highlightsCount": "하이라이트 {count}곳",
+      "cta": "탐험하기"
+    },
+    "detail": {
+      "story": "이야기",
+      "highlights": "하이라이트",
+      "gallery": "갤러리",
+      "location": "위치",
+      "region": "지역",
+      "toursAvailable": "이용 가능한 여정",
+      "toursHeading": "{destination}을 경유하는 여정",
+      "noTours": "현재 이곳을 경유하는 여정이 없습니다."
+    },
+    "cta": {
+      "heading": "지역을 넘나드는 여정을 구성하세요",
+      "body": "다섯 지역 중 원하는 곳을 하나의 프라이빗 일정으로 엮어 드립니다. 어디서 시작하고 싶으신지 알려주세요.",
+      "button": "여정 설계하기"
+    },
+    "map": {
+      "regionListLabel": "지역별 여행지",
+      "pinLabel": "{title}, {region}",
+      "loadFailed": "인터랙티브 지도를 불러오지 못했습니다. 아래의 여행지 목록을 이용해 주세요."
+    }
+  },
   "stub": {
     "comingSoon": "곧 공개",
     "backHome": "처음으로"

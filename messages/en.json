@@ -138,6 +138,47 @@
       "copyright": "© 2026 Amuun Expeditions. All rights reserved."
     }
   },
+  "destinations": {
+    "metaTitle": "Destinations · Amuun",
+    "metaDescription": "Five regions across Mongolia — Central, Gobi, Western, Northern, and Terelj. Choose where your journey runs.",
+    "hero": {
+      "eyebrow": "Geography",
+      "heading": "Five regions, one country",
+      "intro": "Mongolia is not a single landscape. From the gravel plains of the Gobi to the glaciated peaks of the Altai, from the taiga forests of Khuvsgul to the granite valleys of Terelj — every region carries its own weather, its own people, its own pace. Choose where your journey runs."
+    },
+    "regions": {
+      "central": { "label": "Central", "tagline": "Empire and the Orkhon valley" },
+      "gobi": { "label": "Gobi", "tagline": "Fossil cliffs and singing dunes" },
+      "western": { "label": "Western", "tagline": "Glaciers and eagle hunters" },
+      "northern": { "label": "Northern", "tagline": "Taiga, reindeer, and a dark blue lake" },
+      "terelj": { "label": "Terelj", "tagline": "Granite cliffs an hour from the capital" }
+    },
+    "card": {
+      "bestTime": "Best time",
+      "highlightsCount": "{count} highlights",
+      "cta": "Explore"
+    },
+    "detail": {
+      "story": "Story",
+      "highlights": "Highlights",
+      "gallery": "Gallery",
+      "location": "Location",
+      "region": "Region",
+      "toursAvailable": "Tours available",
+      "toursHeading": "Tours featuring {destination}",
+      "noTours": "No tours currently routed through here."
+    },
+    "cta": {
+      "heading": "Compose a journey across regions",
+      "body": "Mix any of the five into a single private itinerary. Tell us where you want to begin.",
+      "button": "Design your trip"
+    },
+    "map": {
+      "regionListLabel": "Destinations by region",
+      "pinLabel": "{title}, {region}",
+      "loadFailed": "The interactive map could not be loaded. Use the destination list below."
+    }
+  },
   "stub": {
     "comingSoon": "Coming soon",
     "backHome": "Back to home"
