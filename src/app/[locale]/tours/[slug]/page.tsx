@@ -8,6 +8,7 @@ import { resolveLocaleField, type Locale } from '@/lib/locale/resolve-locale-fie
 import type { TourDetail } from '@/types/tour';
 import { Footer } from '@/components/layout/footer';
 import { TourHero } from '@/components/tour/tour-hero';
+import { TourOverview } from '@/components/tour/tour-overview';
 import { TourStatStrip } from '@/components/tour/tour-stat-strip';
 import { routing } from '@/i18n/routing';
 
@@ -91,6 +92,12 @@ export default async function TourDetailPage({
             locale={locale}
           />
         }
+      />
+      <TourOverview
+        summary={summary}
+        description={resolveLocaleField(tour.description, locale)}
+        destinations={tour.destinations}
+        locale={locale}
       />
       <Footer />
     </main>
