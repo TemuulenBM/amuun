@@ -16,8 +16,8 @@
   },
   "hero": {
     "line1": "몽골",
-    "line2": "광야",
-    "left": "여정 / 발자국 / 빛",
+    "line2": "원시",
+    "left": "여정 / 발자국 / 사진",
     "right": "아래로"
   },
   "experiences": {
@@ -25,49 +25,49 @@
       "eyebrow": "고비",
       "headline": "적막의 한가운데",
       "body": "유목민의 오래된 길을 따라 고비의 심장으로 들어간다. 모래언덕은 먹의 한 획처럼 흐른다.",
-      "cta": "길을 듣다"
+      "cta": "고비로 떠나기"
     },
     "taiga": {
       "eyebrow": "타이가",
       "headline": "눈 아래, 순록의 숨",
       "body": "차탄, 타이가에 마지막으로 남은 유목민. 게르 안 뜨거운 차 한 잔, 그리고 별이 가까운 밤.",
-      "cta": "그들을 만나다"
+      "cta": "이야기 읽어보기"
     },
     "dunes": {
       "eyebrow": "홍고린 엘스",
       "headline": "모래가 노래할 때",
       "body": "300미터 사구가 바람 속에서 낮게 운다. 낙타 등 위로 노을이 내려온다.",
-      "cta": "사막으로"
+      "cta": "노을 보러 가기"
     },
     "canyon": {
       "eyebrow": "헤르멘 차브",
       "headline": "땅의 뼛속으로",
       "body": "붉은 절벽, 화석의 시간, 깊은 정적. 이 땅의 고요는 살을 문다고, 이곳 사람들이 말한다.",
-      "cta": "협곡으로 내려가다"
+      "cta": "협곡 걷기"
     },
     "altai": {
       "eyebrow": "알타이 타반 복드",
       "headline": "다섯 성산, 영원의 얼음",
       "body": "이 나라의 가장 높은 봉우리, 수천 년의 빙하. 독수리를 든 카자흐 사냥꾼의 게르에서 삶은 고기 한 점.",
-      "cta": "정상으로"
+      "cta": "원정 준비하기"
     },
     "volcano": {
       "eyebrow": "호르고",
       "headline": "꺼진 불의 심장에서",
       "body": "사라진 화산의 품 안에 고인 맑은 물. 밤이 오면 별은 땅까지 내려온다.",
-      "cta": "호수의 곁으로"
+      "cta": "별 아래 머물기"
     },
     "karakorum": {
       "eyebrow": "오르혼",
       "headline": "제국이 시작된 곳",
       "body": "에르덴 주, 돌거북, 칭기즈칸의 발자취. 고대 수도의 바람은 지금도 이곳에 머문다.",
-      "cta": "역사의 길로"
+      "cta": "역사로 들어가기"
     }
   },
   "contact": {
     "heading_1": "길의",
     "heading_2": "시작",
-    "intro": "무엇이 당신을 부르나요. 사막, 산, 역사, 혹은 그 모두. 당신의 호흡에 맞춘 단 하나의 여정을 설계합니다.",
+    "intro": "어떤 풍경에 마음이 끌리시나요. 사막, 산, 역사, 혹은 그 모두. 당신의 호흡에 맞춘 단 하나의 여정을 설계합니다.",
     "emailLabel": "이메일",
     "emailValue": "hello@amuun.travel",
     "responseLabel": "답변",
@@ -78,10 +78,10 @@
       "email": "이메일",
       "emailPlaceholder": "your@email.com",
       "interest": "관심",
-      "selectExpedition": "여정을 선택해 주십시오",
+      "selectExpedition": "여정을 선택해 주세요",
       "customJourney": "맞춤 여정",
       "message": "메시지",
-      "messagePlaceholder": "꿈꾸시는 여정을 들려주십시오...",
+      "messagePlaceholder": "꿈꾸시는 여정을 들려주세요",
       "submit": "보내기",
       "downloadItinerary": "일정 PDF 받기"
     },
@@ -96,6 +96,6 @@
   "errors": {
     "notFoundTitle": "길을 잃다",
     "errorTitle": "잠시 멈춤",
-    "retry": "다시"
+    "retry": "다시 시도하기"
   }
 }
