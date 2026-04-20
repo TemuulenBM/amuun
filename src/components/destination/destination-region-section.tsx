@@ -1,6 +1,6 @@
 import type { Locale } from '@/lib/locale/resolve-locale-field';
 import { DestinationCard } from './destination-card';
-import type { LocaleString, ImageWithAlt } from '@/types/tour';
+import type { LocaleString, ImageWithAlt } from '@/types/sanity';
 
 export interface RegionSectionData {
   regionSlug: 'central' | 'gobi' | 'western' | 'northern' | 'terelj';

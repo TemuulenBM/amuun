@@ -13,18 +13,6 @@ import {
 import { DestinationsCtaBand } from '@/components/destination/destinations-cta-band';
 import type { MaplibrePin } from '@/components/shared/maplibre-map';
 import type { Destination } from '@/types/sanity';
-import type { ImageWithAlt as TourImageWithAlt, LocaleString as TourLocaleString } from '@/types/tour';
-
-type DestinationForCard = {
-  _id: string;
-  title: TourLocaleString;
-  slug: { current: string };
-  subtitle?: TourLocaleString;
-  region: string;
-  bestTime?: TourLocaleString;
-  highlights?: TourLocaleString[];
-  heroImage: TourImageWithAlt;
-};
 
 const REGION_ORDER = ['central', 'gobi', 'western', 'northern', 'terelj'] as const;
 type RegionSlug = (typeof REGION_ORDER)[number];
@@ -90,7 +78,7 @@ export default async function DestinationsListingPage({
       regionSlug: r,
       regionLabel: t(`regions.${r}.label`),
       regionTagline: t(`regions.${r}.tagline`),
-      destinations: grouped[r] as unknown as DestinationForCard[],
+      destinations: grouped[r],
     }),
   );
 

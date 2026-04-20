@@ -1,3 +1,6 @@
+// Protomaps `?key=demo` is their free, rate-limited public demo endpoint,
+// used intentionally here for a portfolio-scale deployment. For higher traffic
+// replace with a paid Protomaps key (via env var) or self-host `.pmtiles`.
 export const MAPLIBRE_STYLE_LIGHT =
   'https://api.protomaps.com/styles/v5/light/en.json?key=demo';
 

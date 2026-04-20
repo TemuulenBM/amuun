@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { LocaleLink } from '@/components/shared/locale-link';
 import { urlFor } from '@/sanity/lib/image';
 import { resolveLocaleField, type Locale } from '@/lib/locale/resolve-locale-field';
-import type { LocaleString, ImageWithAlt } from '@/types/tour';
+import type { LocaleString, ImageWithAlt } from '@/types/sanity';
 
 interface DestinationCardData {
   _id: string;

@@ -1,5 +1,3 @@
-'use client';
-
 import { MaplibreMap, type MaplibrePin } from '@/components/shared/maplibre-map';
 
 interface DestinationLocationMapProps {
