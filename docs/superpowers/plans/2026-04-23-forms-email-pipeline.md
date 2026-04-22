@@ -78,7 +78,7 @@ package.json                                           # +react-email deps, +tur
 Run:
 
 ```bash
-pnpm add @react-email/components @react-email/render @marsidev/react-turnstile
+pnpm add react-email @react-email/render @marsidev/react-turnstile
 ```
 
 Expected: `package.json` gains all three entries under `dependencies`. Lockfile updates.
@@ -1042,7 +1042,7 @@ import {
   Preview,
   Section,
   Text,
-} from '@react-email/components';
+} from 'react-email';
 import type { ReactNode } from 'react';
 
 interface EmailShellProps {
@@ -1115,7 +1115,7 @@ export function EmailShell({ preview, children }: EmailShellProps) {
 Create `src/emails/admin-notification.tsx`:
 
 ```tsx
-import { Heading, Hr, Section, Text } from '@react-email/components';
+import { Heading, Hr, Section, Text } from 'react-email';
 import { EmailShell } from './email-shell';
 
 type FormType = 'contact' | 'customTrip' | 'booking';
@@ -1222,7 +1222,7 @@ export function AdminNotification(props: AdminNotificationProps) {
 Create `src/emails/user-confirmation.tsx`:
 
 ```tsx
-import { Heading, Text } from '@react-email/components';
+import { Heading, Text } from 'react-email';
 import { EmailShell } from './email-shell';
 
 type Locale = 'en' | 'ko' | 'mn';
