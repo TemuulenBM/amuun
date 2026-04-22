@@ -94,3 +94,7 @@ export const destinationSlugsQuery = /* groq */ `
 export const blogPostSlugsQuery = /* groq */ `
 *[_type == "blogPost" && defined(slug.current)][].slug.current
 `;
+
+export const recentSubmissionsByEmailQuery = /* groq */ `
+  count(*[_type == "submission" && email == $email && _createdAt > $tenMinAgo])
+`;
