@@ -2,10 +2,18 @@ import type { StructureResolver } from 'sanity/structure';
 
 import { singletonTypes } from './schemas';
 
-export const structure: StructureResolver = (S) => {
-  const listableTypes = ['tour', 'destination', 'blogPost', 'testimonial', 'teamMember', 'faq', 'legalPage', 'submission'];
+const listableContentTypes = [
+  'tour',
+  'destination',
+  'blogPost',
+  'testimonial',
+  'teamMember',
+  'faq',
+  'legalPage',
+] as const;
 
-  return S.list()
+export const structure: StructureResolver = (S) =>
+  S.list()
     .title('Content')
     .items([
       S.listItem()
@@ -13,14 +21,54 @@ export const structure: StructureResolver = (S) => {
         .id('siteSettings')
         .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
       S.divider(),
-      ...listableTypes.map((typeName) =>
+      ...listableContentTypes.map((typeName) =>
         S.listItem()
           .title(labelFor(typeName))
           .schemaType(typeName)
           .child(S.documentTypeList(typeName).title(labelFor(typeName))),
       ),
+      S.divider(),
+      S.listItem()
+        .title('Submissions')
+        .child(
+          S.list()
+            .title('Submissions')
+            .items([
+              S.listItem()
+                .title('All')
+                .child(S.documentTypeList('submission').title('All submissions')),
+              S.listItem()
+                .title('Contact')
+                .child(
+                  S.documentTypeList('submission')
+                    .title('Contact')
+                    .filter('_type == "submission" && formType == "contact"'),
+                ),
+              S.listItem()
+                .title('Custom Trip')
+                .child(
+                  S.documentTypeList('submission')
+                    .title('Custom Trip')
+                    .filter('_type == "submission" && formType == "customTrip"'),
+                ),
+              S.listItem()
+                .title('Booking')
+                .child(
+                  S.documentTypeList('submission')
+                    .title('Booking')
+                    .filter('_type == "submission" && formType == "booking"'),
+                ),
+              S.divider(),
+              S.listItem()
+                .title('Archived')
+                .child(
+                  S.documentTypeList('submission')
+                    .title('Archived')
+                    .filter('_type == "submission" && status == "archived"'),
+                ),
+            ]),
+        ),
     ]);
-};
 
 function labelFor(typeName: string): string {
   switch (typeName) {
@@ -38,8 +86,6 @@ function labelFor(typeName: string): string {
       return 'FAQs';
     case 'legalPage':
       return 'Legal pages';
-    case 'submission':
-      return 'Submissions';
     default:
       return typeName;
   }
