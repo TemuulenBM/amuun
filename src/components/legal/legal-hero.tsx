@@ -5,10 +5,10 @@ interface LegalHeroProps {
 }
 
 export function LegalHero({ title, updatedAt, locale }: LegalHeroProps) {
-  const formatted = new Intl.DateTimeFormat(locale, {
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(updatedAt));
+  const date = new Date(updatedAt);
+  const formatted = !isNaN(date.getTime())
+    ? new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date)
+    : '';
 
   return (
     <section className="bg-[#0B0D10] px-[7vw] pt-[18vh] pb-[10vh]">
