@@ -4,7 +4,9 @@ export const siteSettingsQuery = /* groq */ `
   "socialLinks": socialLinks[]{_key, platform, url},
   "certifications": certifications[]{_key, name, logo, url},
   "pressFeatures": pressFeatures[]{_key, publication, logo, url, quote},
-  "partnerLogos": partnerLogos[]{_key, name, logo, url}
+  "partnerLogos": partnerLogos[]{_key, name, logo, url},
+  "aboutHeroImage": aboutHeroImage { ..., alt },
+  "aboutImage": aboutImage { ..., alt }
 }
 `;
 

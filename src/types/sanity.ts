@@ -273,6 +273,9 @@ export interface SiteSettings extends BaseDocument {
   certifications?: Certification[];
   pressFeatures?: PressFeature[];
   partnerLogos?: PartnerLogo[];
+  aboutHeroImage?: ImageWithAlt;
+  aboutStory?: LocaleBlockContent;
+  aboutImage?: ImageWithAlt;
   defaultSeo?: Seo;
 }
 
