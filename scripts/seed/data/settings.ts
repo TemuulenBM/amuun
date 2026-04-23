@@ -1,3 +1,5 @@
+import { uploadLocalImage, imageWithAlt } from '../upload';
+
 type Locale = { en: string; ko: string; mn: string };
 
 function lstr(v: Locale) {
@@ -7,7 +9,12 @@ function ltext(v: Locale) {
   return { _type: 'localeText', ...v };
 }
 
-export function buildSiteSettings() {
+export async function buildSiteSettings() {
+  const [heroAsset, storyAsset] = await Promise.all([
+    uploadLocalImage('hero-desert.jpg'),
+    uploadLocalImage('taiga-reindeer.jpg'),
+  ]);
+
   return {
     _id: 'siteSettings',
     _type: 'siteSettings',
@@ -16,6 +23,16 @@ export function buildSiteSettings() {
       en: 'Private expeditions across the world last wild horizon.',
       ko: '당신 한 사람을 위한, 세상의 마지막 야생.',
       mn: 'Зэлүүд нутгийн эрхэм аян. Зөвхөн таны хэмнэлээр.',
+    }),
+    aboutHeroImage: imageWithAlt(heroAsset, {
+      en: 'Mongolian desert landscape at golden hour',
+      ko: '황금빛 몽골 사막 풍경',
+      mn: 'Монголын цөлийн алтан цаг',
+    }),
+    aboutImage: imageWithAlt(storyAsset, {
+      en: 'Reindeer herders in the Mongolian taiga',
+      ko: '몽골 타이가의 순록 유목민',
+      mn: 'Монголын тайгад цаа буга малладаг хүмүүс',
     }),
     aboutStory: {
       _type: 'localeBlockContent',

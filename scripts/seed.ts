@@ -56,8 +56,8 @@ async function run() {
   await createOrReplace(legals);
   console.log(`  ${legals.length} legal pages created`);
 
-  console.log('→ writing site settings singleton');
-  const settings = buildSiteSettings();
+  console.log('→ uploading about images + writing site settings singleton');
+  const settings = await buildSiteSettings();
   await createOrReplace([settings]);
   console.log('  site settings written');
 
