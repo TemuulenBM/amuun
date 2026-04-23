@@ -185,7 +185,11 @@
   },
   "errors": {
     "notFoundTitle": "Lost in the steppe",
+    "notFoundDesc": "The page you were searching for has vanished into the horizon.",
+    "notFoundEyebrow": "404 · Page not found",
     "errorTitle": "The caravan halted",
+    "errorDesc": "Something went wrong on our end. Please try again or return home.",
+    "errorEyebrow": "500 · Server error",
     "retry": "Try again"
   },
   "forms": {

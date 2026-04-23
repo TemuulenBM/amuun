@@ -147,11 +147,26 @@
       "intro": "몽골은 단일한 풍경이 아니다. 고비의 자갈 평원에서 알타이의 빙하 봉우리까지, 흡스굴의 타이가 숲에서 테렐지의 화강암 계곡까지 — 각 지역은 저마다의 날씨와 사람과 리듬을 품고 있다. 당신의 여정이 흐를 곳을 선택하세요."
     },
     "regions": {
-      "central": { "label": "중앙", "tagline": "제국과 오르혼 계곡" },
-      "gobi": { "label": "고비", "tagline": "화석 절벽과 노래하는 사구" },
-      "western": { "label": "서부", "tagline": "빙하와 독수리 사냥꾼" },
-      "northern": { "label": "북부", "tagline": "타이가, 순록, 그리고 짙푸른 호수" },
-      "terelj": { "label": "테렐지", "tagline": "수도에서 한 시간 거리의 화강암 절벽" }
+      "central": {
+        "label": "중앙",
+        "tagline": "제국과 오르혼 계곡"
+      },
+      "gobi": {
+        "label": "고비",
+        "tagline": "화석 절벽과 노래하는 사구"
+      },
+      "western": {
+        "label": "서부",
+        "tagline": "빙하와 독수리 사냥꾼"
+      },
+      "northern": {
+        "label": "북부",
+        "tagline": "타이가, 순록, 그리고 짙푸른 호수"
+      },
+      "terelj": {
+        "label": "테렐지",
+        "tagline": "수도에서 한 시간 거리의 화강암 절벽"
+      }
     },
     "card": {
       "bestTime": "최적 시기",
@@ -186,7 +201,11 @@
   "errors": {
     "notFoundTitle": "길을 잃다",
     "errorTitle": "잠시 멈춤",
-    "retry": "다시 시도하기"
+    "retry": "다시 시도하기",
+    "notFoundDesc": "찾으시던 페이지가 지평선 너머로 사라졌습니다.",
+    "notFoundEyebrow": "404 · 페이지를 찾을 수 없음",
+    "errorDesc": "서버 오류가 발생했습니다. 다시 시도하거나 홈으로 돌아가세요.",
+    "errorEyebrow": "500 · 서버 오류"
   },
   "forms": {
     "common": {
