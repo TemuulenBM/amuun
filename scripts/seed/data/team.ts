@@ -110,7 +110,6 @@ export async function buildTeam() {
         mn: 'Temuulen бол аялал, зочид буудлын брэндүүдэд зориулсан шилдэг вэб туршлага бүтээдэг нэг хүний Voidex Studio студийн үүсгэн байгуулагч юм.',
       },
       photo: null,
-      isFounder: false,
       order: 5,
     },
   ];
