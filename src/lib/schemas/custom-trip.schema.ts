@@ -9,12 +9,21 @@ export const budgetEnum = z.enum([
   '10k-plus',
 ]);
 
-const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const MIN_ADVANCE_DAYS = 7;
 const MAX_DURATION_DAYS = 60;
 
-function diffDays(later: Date, earlier: Date): number {
-  return Math.floor((later.getTime() - earlier.getTime()) / MS_PER_DAY);
+function toUtcDateOnly(d: Date): number {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+
+function diffDaysUtc(later: Date, earlier: Date): number {
+  const MS = 1000 * 60 * 60 * 24;
+  return Math.round((toUtcDateOnly(later) - toUtcDateOnly(earlier)) / MS);
+}
+
+function todayUtc(): Date {
+  const now = new Date();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
 }
 
 export const customTripSchema = baseSubmissionSchema
@@ -26,24 +35,25 @@ export const customTripSchema = baseSubmissionSchema
     interests: z
       .array(interestEnum)
       .min(1, 'minLength')
-      .max(4, 'maxLength'),
+      .max(4, 'maxLength')
+      .refine((arr) => new Set(arr).size === arr.length, {
+        message: 'duplicate',
+      }),
     budgetRange: budgetEnum,
   })
   .refine(
-    (data) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return diffDays(data.travelStartDate, today) >= MIN_ADVANCE_DAYS;
-    },
+    (data) => diffDaysUtc(data.travelStartDate, todayUtc()) >= MIN_ADVANCE_DAYS,
     { message: 'dateTooSoon', path: ['travelStartDate'] },
   )
-  .refine((data) => data.travelEndDate > data.travelStartDate, {
-    message: 'dateRange',
-    path: ['travelEndDate'],
-  })
   .refine(
-    (data) => diffDays(data.travelEndDate, data.travelStartDate) <= MAX_DURATION_DAYS,
-    { message: 'dateRange', path: ['travelEndDate'] },
+    (data) =>
+      toUtcDateOnly(data.travelEndDate) > toUtcDateOnly(data.travelStartDate),
+    { message: 'dateRangeOrder', path: ['travelEndDate'] },
+  )
+  .refine(
+    (data) =>
+      diffDaysUtc(data.travelEndDate, data.travelStartDate) <= MAX_DURATION_DAYS,
+    { message: 'dateRangeTooLong', path: ['travelEndDate'] },
   );
 
 export type CustomTripInput = z.infer<typeof customTripSchema>;

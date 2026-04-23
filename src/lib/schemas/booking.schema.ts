@@ -3,6 +3,15 @@ import { baseSubmissionSchema } from './base.schema';
 
 export const bookingTierEnum = z.enum(['standard', 'deluxe', 'private']);
 
+function toUtcDateOnly(d: Date): number {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+
+function todayUtc(): number {
+  const now = new Date();
+  return Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+}
+
 export const bookingSchema = baseSubmissionSchema
   .extend({
     formType: z.literal('booking'),
@@ -20,11 +29,7 @@ export const bookingSchema = baseSubmissionSchema
       .or(z.literal('')),
   })
   .refine(
-    (data) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return data.preferredStartDate.getTime() >= today.getTime();
-    },
+    (data) => toUtcDateOnly(data.preferredStartDate) >= todayUtc(),
     { message: 'dateTooSoon', path: ['preferredStartDate'] },
   );
 
