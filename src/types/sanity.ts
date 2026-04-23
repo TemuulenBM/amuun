@@ -180,21 +180,46 @@ export interface Tour extends BaseDocument {
   seo?: Seo;
 }
 
-export type FormType = 'contact' | 'customTrip' | 'booking' | 'newsletter';
-export type SubmissionStatus = 'new' | 'inProgress' | 'resolved' | 'spam';
+export type FormType = 'contact' | 'customTrip' | 'booking';
+export type SubmissionStatus = 'new' | 'responded' | 'archived';
+export type SubmissionLocale = 'en' | 'ko' | 'mn';
+
+export interface SubmissionPayload {
+  subject?: 'general' | 'press' | 'partnership' | 'other';
+  partySize?: number;
+  travelStartDate?: string;
+  travelEndDate?: string;
+  interests?: Array<'culture' | 'nature' | 'adventure' | 'food'>;
+  budgetRange?: 'under-3k' | '3k-5k' | '5k-10k' | '10k-plus';
+  tourSlug?: string;
+  tourTitle?: string;
+  preferredStartDate?: string;
+  adults?: number;
+  children?: number;
+  tier?: 'standard' | 'deluxe' | 'private';
+  specialRequests?: string;
+}
+
+export interface SubmissionMeta {
+  ip?: string;
+  userAgent?: string;
+  referrer?: string;
+  submittedAt?: string;
+}
 
 export interface Submission extends BaseDocument {
   _type: 'submission';
   formType: FormType;
+  status: SubmissionStatus;
   name?: string;
   email?: string;
   phone?: string;
   message?: string;
-  interest?: string;
-  tourSlug?: string;
-  metadata?: string;
-  submittedAt: string;
-  status: SubmissionStatus;
+  locale?: SubmissionLocale;
+  consentAccepted?: boolean;
+  consentedAt?: string;
+  payload?: SubmissionPayload;
+  meta?: SubmissionMeta;
 }
 
 export interface LegalPage extends BaseDocument {
