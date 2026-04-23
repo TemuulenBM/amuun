@@ -1809,7 +1809,9 @@ Insert the `forms` key as a top-level member of the root object in `messages/en.
       "turnstile": "Verification required. Please disable ad-blockers and try again.",
       "serviceUnavailable": "Something went wrong. Please try again in a moment.",
       "dateTooSoon": "Please choose a date at least 7 days from today.",
-      "dateRange": "End date must be after start date, and trip no longer than 60 days.",
+      "dateRangeOrder": "End date must be after start date.",
+      "dateRangeTooLong": "Trip must be no longer than 60 days.",
+      "duplicate": "Please pick distinct options.",
       "partySize": "Party size must be between 1 and 20."
     }
   },
@@ -1920,7 +1922,9 @@ Insert the same `forms` key structure translated to Korean (존댓말, formal re
       "turnstile": "확인이 필요합니다. 광고 차단을 해제하고 다시 시도해 주세요.",
       "serviceUnavailable": "문제가 발생했습니다. 잠시 후 다시 시도해 주세요.",
       "dateTooSoon": "오늘로부터 최소 7일 이후의 날짜를 선택해 주세요.",
-      "dateRange": "도착일은 출발일 이후여야 하며, 여행 기간은 60일을 초과할 수 없습니다.",
+      "dateRangeOrder": "도착일은 출발일 이후여야 합니다.",
+      "dateRangeTooLong": "여행 기간은 60일을 초과할 수 없습니다.",
+      "duplicate": "서로 다른 옵션을 선택해 주세요.",
       "partySize": "인원은 1명에서 20명 사이로 입력해 주세요."
     }
   },
@@ -2031,7 +2035,9 @@ Insert the same `forms` key structure translated to natural Mongolian:
       "turnstile": "Баталгаажуулалт шаардлагатай. Reklam blocker-ыг унтраагаад дахин оролдоно уу.",
       "serviceUnavailable": "Алдаа гарлаа. Түр хүлээгээд дахин оролдоно уу.",
       "dateTooSoon": "Өнөөдрөөс хамгийн багадаа 7 хоногийн дараах огноог сонгоно уу.",
-      "dateRange": "Дуусах огноо эхлэх огнооны дараа байх ёстой бөгөөд аялал 60 хоногоос хэтрэхгүй.",
+      "dateRangeOrder": "Дуусах огноо эхлэх огнооны дараа байх ёстой.",
+      "dateRangeTooLong": "Аялал 60 хоногоос хэтрэхгүй байх ёстой.",
+      "duplicate": "Ялгаатай сонголтуудыг сонгоно уу.",
       "partySize": "Хүний тоо 1-ээс 20-ийн хооронд байх ёстой."
     }
   },
@@ -2604,7 +2610,7 @@ export function CustomTripForm({ locale, siteKey }: CustomTripFormProps) {
               {...register('travelEndDate', { valueAsDate: true })}
               error={
                 errors.travelEndDate
-                  ? mapErrorCode(errors.travelEndDate.message, 'dateRange')
+                  ? mapErrorCode(errors.travelEndDate.message, 'dateRangeOrder')
                   : undefined
               }
             />
@@ -2792,7 +2798,7 @@ Run: `pnpm dev`
 
 In browser, visit `http://localhost:3000/en/custom-trip`:
 1. Try submitting with start date tomorrow → should show `dateTooSoon` error.
-2. Try start = today+10, end = today+9 → should show `dateRange` error.
+2. Try start = today+10, end = today+9 → should show `dateRangeOrder` error; try start = today+10, end = today+75 → should show `dateRangeTooLong` error.
 3. Submit with valid values + all required + consent. Expect SuccessCard.
 4. Repeat at `/ko/custom-trip` and `/mn/custom-trip` — verify translations.
 
