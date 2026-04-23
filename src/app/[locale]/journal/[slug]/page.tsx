@@ -11,22 +11,12 @@ import { JournalArticleHero } from '@/components/journal/journal-article-hero';
 import { JournalArticleBody } from '@/components/journal/journal-article-body';
 import { JournalRelatedTours } from '@/components/journal/journal-related-tours';
 import { routing } from '@/i18n/routing';
-import type { LocaleString, LocaleText, LocaleBlockContent, ImageWithAlt } from '@/types/tour';
+import type { LocaleString, LocaleText, LocaleBlockContent, ImageWithAlt, TourRelatedRef } from '@/types/tour';
 
 interface AuthorRef {
   _id: string;
   name: string;
   role: LocaleString;
-}
-
-interface RelatedTourRef {
-  _id: string;
-  title: LocaleString;
-  slug: { current: string };
-  summary: LocaleText;
-  heroImage: ImageWithAlt;
-  duration: number;
-  difficulty: 'easy' | 'moderate' | 'challenging' | 'expert';
 }
 
 interface BlogPostDetail {
@@ -38,11 +28,11 @@ interface BlogPostDetail {
   heroImage: ImageWithAlt;
   category: string;
   author?: AuthorRef;
-  relatedTours?: RelatedTourRef[];
+  relatedTours?: TourRelatedRef[];
   publishedAt: string;
   seo?: {
     metaTitle?: LocaleString;
-    metaDescription?: LocaleString;
+    metaDescription?: LocaleText;
     ogImage?: ImageWithAlt;
   };
 }
@@ -116,7 +106,7 @@ export default async function JournalArticlePage({
   const title = resolveLocaleField(post.title, locale) ?? '';
   const imageUrl = urlFor(post.heroImage).width(2000).quality(85).url();
   const imageAlt = resolveLocaleField(post.heroImage.alt, locale) ?? title;
-  const contentBlocks = post.content?.[locale] as PortableTextBlock[] | undefined;
+  const contentBlocks = resolveLocaleField(post.content, locale);
   const readTime = estimateReadTime(contentBlocks);
   const authorName = post.author?.name ?? 'Temuulen';
   const authorRole = resolveLocaleField(post.author?.role, locale) ?? 'Voidex Studio';

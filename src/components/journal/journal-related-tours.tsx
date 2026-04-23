@@ -3,20 +3,10 @@ import Image from 'next/image';
 import { LocaleLink } from '@/components/shared/locale-link';
 import { resolveLocaleField, type Locale } from '@/lib/locale/resolve-locale-field';
 import { urlFor } from '@/sanity/lib/image';
-import type { LocaleString, LocaleText, ImageWithAlt } from '@/types/tour';
-
-interface RelatedTourRef {
-  _id: string;
-  title: LocaleString;
-  slug: { current: string };
-  summary: LocaleText;
-  heroImage: ImageWithAlt;
-  duration: number;
-  difficulty: 'easy' | 'moderate' | 'challenging' | 'expert';
-}
+import type { TourRelatedRef } from '@/types/tour';
 
 interface JournalRelatedToursProps {
-  tours: RelatedTourRef[];
+  tours: TourRelatedRef[];
   locale: Locale;
 }
 
