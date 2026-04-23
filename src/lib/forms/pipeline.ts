@@ -12,10 +12,18 @@ import { verifyTurnstileToken } from './turnstile';
 import type { ApiResult, FormType, RequestMeta } from './types';
 
 interface BaseFields {
+  name: string;
   email: string;
+  phone?: string;
+  message: string;
   honeypot: string;
   turnstileToken: string;
   locale: 'en' | 'ko' | 'mn';
+}
+
+interface EmailBuilderArgs<T extends BaseFields> {
+  data: T;
+  submissionId: string;
 }
 
 interface ProcessOptions<T extends BaseFields> {
@@ -23,14 +31,8 @@ interface ProcessOptions<T extends BaseFields> {
   formType: FormType;
   schema: ZodType<T>;
   buildSanityPayload: (data: T) => Record<string, unknown>;
-  buildAdminEmail: (args: {
-    data: T;
-    submissionId: string;
-  }) => ReactElement;
-  buildUserEmail: (args: {
-    data: T;
-    submissionId: string;
-  }) => ReactElement;
+  buildAdminEmail: (args: EmailBuilderArgs<T>) => ReactElement;
+  buildUserEmail: (args: EmailBuilderArgs<T>) => ReactElement;
   adminSubject: (data: T) => string;
   userSubject: (data: T) => string;
 }
@@ -59,16 +61,29 @@ function buildMeta(request: NextRequest): RequestMeta {
   };
 }
 
+function isSameOrigin(origin: string, host: string): boolean {
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
+interface SanityCreateResult {
+  _id: string;
+  [key: string]: unknown;
+}
+
 export async function processSubmission<T extends BaseFields>(
   opts: ProcessOptions<T>,
 ): Promise<NextResponse<ApiResult>> {
   const { request, formType, schema } = opts;
   const env = getEnv();
 
-  // Same-origin guard
+  // Same-origin guard (URL-structural, not suffix match)
   const origin = request.headers.get('origin');
   const host = request.headers.get('host');
-  if (origin && host && !origin.endsWith(host)) {
+  if (origin && host && !isSameOrigin(origin, host)) {
     return NextResponse.json(
       { ok: false, error: 'SERVICE_UNAVAILABLE' },
       { status: 403 },
@@ -90,7 +105,6 @@ export async function processSubmission<T extends BaseFields>(
   const parsed = schema.safeParse(raw);
   if (!parsed.success) {
     const fields = zodErrorToFieldMap(parsed.error);
-    // Honeypot is a field error but we prefer silent 200
     if (fields.honeypot) {
       console.warn(`[api/${formType}] honeypot tripped`);
       return NextResponse.json(
@@ -126,19 +140,19 @@ export async function processSubmission<T extends BaseFields>(
     );
   }
 
-  // 5. Dedupe
+  // 5. Dedupe (does not block submission; only skips user email)
   const skipUserEmail = await hasRecentConfirmation(data.email);
 
-  // 6. Parallel persist
+  // 6. Sanity write first (sequence so emails get real _id)
   const meta = buildMeta(request);
   const sanityDoc = {
     _type: 'submission',
     formType,
     status: 'new',
-    name: (data as unknown as { name: string }).name,
+    name: data.name,
     email: data.email,
-    phone: (data as unknown as { phone?: string }).phone || undefined,
-    message: (data as unknown as { message: string }).message,
+    phone: data.phone || undefined,
+    message: data.message,
     locale: data.locale,
     consentAccepted: true,
     consentedAt: meta.submittedAt,
@@ -146,16 +160,33 @@ export async function processSubmission<T extends BaseFields>(
     meta,
   };
 
+  let submissionId: string;
+  try {
+    const created = (await sanityWriteClient.create(sanityDoc)) as SanityCreateResult;
+    if (typeof created._id !== 'string' || created._id.length === 0) {
+      throw new Error('Sanity create returned no _id');
+    }
+    submissionId = created._id;
+  } catch (error: unknown) {
+    console.error(`[api/${formType}] sanity write failed`, {
+      ip,
+      message: error instanceof Error ? error.message : 'unknown',
+    });
+    return NextResponse.json(
+      { ok: false, error: 'SERVICE_UNAVAILABLE' },
+      { status: 500 },
+    );
+  }
+
+  // 7. Parallel email dispatch with real submissionId
   const resend = env.RESEND_API_KEY ? new Resend(env.RESEND_API_KEY) : null;
   const fromAddr = env.CONTACT_EMAIL_FROM ?? 'onboarding@resend.dev';
   const adminTo = env.CONTACT_EMAIL_TO;
 
-  const sanityP = sanityWriteClient.create(sanityDoc);
-
   const adminP =
     resend && adminTo
       ? (async () => {
-          const html = await render(opts.buildAdminEmail({ data, submissionId: 'pending' }));
+          const html = await render(opts.buildAdminEmail({ data, submissionId }));
           return resend.emails.send({
             from: fromAddr,
             to: adminTo,
@@ -169,7 +200,7 @@ export async function processSubmission<T extends BaseFields>(
   const userP =
     resend && !skipUserEmail
       ? (async () => {
-          const html = await render(opts.buildUserEmail({ data, submissionId: 'pending' }));
+          const html = await render(opts.buildUserEmail({ data, submissionId }));
           return resend.emails.send({
             from: fromAddr,
             to: data.email,
@@ -179,28 +210,8 @@ export async function processSubmission<T extends BaseFields>(
         })()
       : Promise.resolve({ skipped: true as const });
 
-  const [sanityRes, adminRes, userRes] = await Promise.allSettled([
-    sanityP,
-    adminP,
-    userP,
-  ]);
+  const [adminRes, userRes] = await Promise.allSettled([adminP, userP]);
 
-  // 7. Response
-  if (sanityRes.status === 'rejected') {
-    console.error(`[api/${formType}] sanity write failed`, {
-      ip,
-      message:
-        sanityRes.reason instanceof Error
-          ? sanityRes.reason.message
-          : 'unknown',
-    });
-    return NextResponse.json(
-      { ok: false, error: 'SERVICE_UNAVAILABLE' },
-      { status: 500 },
-    );
-  }
-
-  const submissionId = (sanityRes.value as { _id: string })._id;
   const adminFailed = adminRes.status === 'rejected';
   const userFailed = userRes.status === 'rejected';
   const emailWarning = adminFailed || userFailed;

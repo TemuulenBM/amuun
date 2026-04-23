@@ -4,7 +4,6 @@ export type FormErrorCode =
   | 'INVALID_JSON'
   | 'VALIDATION'
   | 'TURNSTILE_FAILED'
-  | 'HONEYPOT_TRIPPED'
   | 'SERVICE_UNAVAILABLE';
 
 export interface ApiSuccess {
