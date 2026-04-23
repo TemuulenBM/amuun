@@ -93,5 +93,25 @@ export async function buildTeam() {
       photo: guide3,
       order: 4,
     },
+    {
+      _id: 'team-temuulen',
+      _type: 'teamMember',
+      name: 'Temuulen',
+      role: {
+        _type: 'localeString',
+        en: 'Voidex Studio',
+        ko: 'Voidex Studio',
+        mn: 'Voidex Studio',
+      },
+      bio: {
+        _type: 'localeText',
+        en: 'Temuulen is the founder of Voidex Studio, a one-person development studio building premium web experiences for travel and hospitality brands.',
+        ko: 'Temuulen은 여행 및 호스피탈리티 브랜드를 위한 프리미엄 웹 경험을 구축하는 1인 개발 스튜디오 Voidex Studio의 창립자입니다.',
+        mn: 'Temuulen бол аялал, зочид буудлын брэндүүдэд зориулсан шилдэг вэб туршлага бүтээдэг нэг хүний Voidex Studio студийн үүсгэн байгуулагч юм.',
+      },
+      photo: null,
+      isFounder: false,
+      order: 5,
+    },
   ];
 }

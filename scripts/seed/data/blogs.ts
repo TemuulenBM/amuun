@@ -123,7 +123,7 @@ export async function buildBlogs() {
         mn: 'Зуны бэлчээрт өвс идэж буй цаа буга',
       }),
       category: 'culture',
-      author: { _type: 'reference', _ref: 'team-saraa-dashdorj' },
+      author: { _type: 'reference', _ref: 'team-temuulen' },
       relatedTours: [{ _type: 'reference', _ref: 'tour-reindeer-camp' }],
       publishedAt: new Date('2026-03-05T09:00:00Z').toISOString(),
       seo: {
@@ -157,7 +157,7 @@ export async function buildBlogs() {
         mn: 'Тоног хэрэгсэлтэй цөлийн зам',
       }),
       category: 'tips',
-      author: { _type: 'reference', _ref: 'team-erdene-munkhbat' },
+      author: { _type: 'reference', _ref: 'team-temuulen' },
       relatedTours: [
         { _type: 'reference', _ref: 'tour-gobi-crossing' },
         { _type: 'reference', _ref: 'tour-singing-dunes' },
@@ -194,7 +194,7 @@ export async function buildBlogs() {
         mn: 'Өглөөний шалбааг Алтайн оргил',
       }),
       category: 'stories',
-      author: { _type: 'reference', _ref: 'team-nomin-batbayar' },
+      author: { _type: 'reference', _ref: 'team-temuulen' },
       relatedTours: [{ _type: 'reference', _ref: 'tour-five-peaks' }],
       publishedAt: new Date('2026-03-15T09:00:00Z').toISOString(),
       seo: {
