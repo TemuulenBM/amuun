@@ -306,5 +306,17 @@
     "readTime": "{minutes} мин унших",
     "relatedToursEyebrow": "Аяллаа төлөвлөх",
     "relatedToursHeading": "Авч үзэж болох аяллууд"
+  },
+  "about": {
+    "eyebrow": "Манай түүх",
+    "title": "Тал нутгаас төрсөн",
+    "storyEyebrow": "Бид яагаад байдаг вэ",
+    "storyHeading": "Монгол, гоёлгүй",
+    "teamEyebrow": "Хөтөчид",
+    "teamHeading": "Бүх замыг мэддэг хүмүүс",
+    "testimonialsEyebrow": "Талбараас ирсэн дуу хоолой",
+    "testimonialsHeading": "Жуулчдын үг",
+    "metaTitle": "Бидний тухай · Amuun",
+    "metaDescription": "Amuun-ы хөтөч болон түүхтэй танилцаарай — Монголын тансаг аяллын компани."
   }
 }

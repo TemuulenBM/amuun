@@ -306,5 +306,17 @@
     "readTime": "{minutes}분 읽기",
     "relatedToursEyebrow": "여정을 계획하세요",
     "relatedToursHeading": "고려해볼 만한 원정"
+  },
+  "about": {
+    "eyebrow": "우리 이야기",
+    "title": "스텝에서 태어나다",
+    "storyEyebrow": "우리가 존재하는 이유",
+    "storyHeading": "가감 없는 몽골",
+    "teamEyebrow": "가이드",
+    "teamHeading": "모든 길을 아는 사람들",
+    "testimonialsEyebrow": "현장의 목소리",
+    "testimonialsHeading": "여행자들의 이야기",
+    "metaTitle": "소개 · Amuun",
+    "metaDescription": "Amuun의 가이드와 이야기를 만나보세요 — 몽골 프리미엄 원정 전문가."
   }
 }

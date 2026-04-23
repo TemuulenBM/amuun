@@ -306,5 +306,17 @@
     "readTime": "{minutes} min read",
     "relatedToursEyebrow": "Plan your journey",
     "relatedToursHeading": "Expeditions You Might Consider"
+  },
+  "about": {
+    "eyebrow": "Our Story",
+    "title": "Born from the Steppe",
+    "storyEyebrow": "Why We Exist",
+    "storyHeading": "Mongolia, Unfiltered",
+    "teamEyebrow": "The Guides",
+    "teamHeading": "People Who Know Every Pass",
+    "testimonialsEyebrow": "Voices from the Field",
+    "testimonialsHeading": "What Travelers Say",
+    "metaTitle": "About · Amuun",
+    "metaDescription": "Meet the guides and the story behind Amuun — Mongolia's premium expedition outfitter."
   }
 }
