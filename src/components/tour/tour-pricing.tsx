@@ -1,16 +1,18 @@
 import { getTranslations } from 'next-intl/server';
-import { LocaleLink } from '@/components/shared/locale-link';
 import { formatPrice } from '@/lib/format/price';
 import { resolveLocaleField, type Locale } from '@/lib/locale/resolve-locale-field';
 import type { TourPricingData } from '@/types/tour';
+import { BookThisTour } from '@/components/tour/book-this-tour';
 
 interface TourPricingProps {
   pricing: TourPricingData;
   tourSlug: string;
+  tourTitle: string;
   locale: Locale;
+  siteKey: string | undefined;
 }
 
-export async function TourPricing({ pricing, tourSlug, locale }: TourPricingProps) {
+export async function TourPricing({ pricing, tourSlug, tourTitle, locale, siteKey }: TourPricingProps) {
   const t = await getTranslations('tour');
   const tiers = [
     { key: 'standard' as const, label: t('pricingStandard'), amount: pricing.standard },
@@ -40,13 +42,16 @@ export async function TourPricing({ pricing, tourSlug, locale }: TourPricingProp
                   {perLabel}
                 </div>
               </div>
-              <LocaleLink
-                href={`/contact?tour=${tourSlug}&tier=${tier.key}`}
-                className="mt-auto inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#D4A23A] transition-colors hover:text-[#F7F7F5]"
-              >
-                {t('pricingInquire')}
-                <span aria-hidden>→</span>
-              </LocaleLink>
+              <div className="mt-auto">
+                <BookThisTour
+                  variant="tier"
+                  tier={tier.key}
+                  locale={locale}
+                  siteKey={siteKey}
+                  tourSlug={tourSlug}
+                  tourTitle={tourTitle}
+                />
+              </div>
             </article>
           ))}
         </div>
