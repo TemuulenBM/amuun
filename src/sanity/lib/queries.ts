@@ -6,6 +6,7 @@ export const siteSettingsQuery = /* groq */ `
   "pressFeatures": pressFeatures[]{_key, publication, logo, url, quote},
   "partnerLogos": partnerLogos[]{_key, name, logo, url},
   "aboutHeroImage": aboutHeroImage { ..., alt },
+  "aboutStory": aboutStory,
   "aboutImage": aboutImage { ..., alt }
 }
 `;

@@ -115,10 +115,8 @@ export const siteSettings = defineType({
     defineField({
       name: 'aboutHeroImage',
       title: 'About hero image',
-      type: 'image',
+      type: 'imageWithAlt',
       group: 'about',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', type: 'localeString' })],
     }),
     defineField({
       name: 'aboutStory',
@@ -129,10 +127,8 @@ export const siteSettings = defineType({
     defineField({
       name: 'aboutImage',
       title: 'About story image',
-      type: 'image',
+      type: 'imageWithAlt',
       group: 'about',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', type: 'localeString' })],
     }),
     defineField({ name: 'defaultSeo', title: 'Default SEO', type: 'seo', group: 'seo' }),
   ],
