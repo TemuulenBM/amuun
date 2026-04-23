@@ -187,5 +187,111 @@
     "notFoundTitle": "길을 잃다",
     "errorTitle": "잠시 멈춤",
     "retry": "다시 시도하기"
+  },
+  "forms": {
+    "common": {
+      "name": "성함",
+      "email": "이메일",
+      "phone": "연락처",
+      "message": "메시지",
+      "submit": "문의 보내기",
+      "submitting": "전송 중…",
+      "consent": "<privacy>개인정보 처리방침</privacy> 및 <terms>이용약관</terms>에 동의합니다.",
+      "success": {
+        "title": "문의가 도착했습니다",
+        "body": "소중한 메시지 감사드립니다. 24시간 이내에 저희 원정 팀에서 회신드리겠습니다.",
+        "dismiss": "다시 보내기"
+      },
+      "errors": {
+        "required": "필수 항목입니다.",
+        "email": "올바른 이메일 주소를 입력해 주세요.",
+        "minLength": "내용이 너무 짧습니다.",
+        "maxLength": "내용이 너무 깁니다.",
+        "consent": "계속하시려면 개인정보 처리방침에 동의해 주세요.",
+        "turnstile": "확인이 필요합니다. 광고 차단을 해제하고 다시 시도해 주세요.",
+        "serviceUnavailable": "문제가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+        "dateTooSoon": "오늘로부터 최소 7일 이후의 날짜를 선택해 주세요.",
+        "dateRangeOrder": "도착일은 출발일 이후여야 합니다.",
+        "dateRangeTooLong": "여행 기간은 60일을 초과할 수 없습니다.",
+        "duplicate": "서로 다른 옵션을 선택해 주세요.",
+        "partySize": "인원은 1명에서 20명 사이로 입력해 주세요."
+      }
+    },
+    "contact": {
+      "metaTitle": "문의하기 · Amuun",
+      "metaDescription": "Amuun 원정 팀에 문의, 취재, 파트너십 요청을 보내실 수 있습니다.",
+      "eyebrow": "팀에 연락하기",
+      "title": "메시지를 보내주세요",
+      "intro": "어떤 여정을 찾고 계신지 간단히 알려주시면 원정 책임자가 직접 읽고 답변드립니다.",
+      "subject": {
+        "label": "문의 유형",
+        "placeholder": "유형을 선택해 주세요",
+        "options": {
+          "general": "일반 문의",
+          "press": "취재 요청",
+          "partnership": "파트너십",
+          "other": "기타"
+        }
+      },
+      "office": {
+        "title": "저희를 만나실 곳",
+        "city": "몽골 울란바토르",
+        "hours": "월–금 · 울란바토르 시간 09:00–18:00",
+        "emailLabel": "이메일",
+        "emailValue": "hello@amuun.voidex.studio"
+      }
+    },
+    "customTrip": {
+      "metaTitle": "맞춤 여정 설계 · Amuun",
+      "metaDescription": "마음에 그리시는 여정을 들려주시면 맞춤으로 설계해 드립니다.",
+      "eyebrow": "여정을 빚다",
+      "title": "맞춤 원정을 설계하세요",
+      "intro": "몇 가지 정보를 남겨주시면 담당자가 24시간 이내에 맞춤 개요를 보내드립니다.",
+      "fieldsets": {
+        "aboutYou": "고객님에 대하여",
+        "yourJourney": "원하시는 여정"
+      },
+      "partySize": "일행 규모",
+      "partySizeHint": "성인과 어린이를 합한 인원입니다.",
+      "travelWindow": {
+        "start": "가장 빠른 출발",
+        "end": "가장 늦은 귀환"
+      },
+      "interests": {
+        "label": "가장 끌리는 것",
+        "culture": "문화와 유목민",
+        "nature": "자연과 야생",
+        "adventure": "어드벤처",
+        "food": "음식과 웰빙"
+      },
+      "budget": {
+        "label": "1인당 예산",
+        "placeholder": "범위를 선택해 주세요",
+        "options": {
+          "under-3k": "$3,000 미만",
+          "3k-5k": "$3,000 – $5,000",
+          "5k-10k": "$5,000 – $10,000",
+          "10k-plus": "$10,000 이상"
+        }
+      }
+    },
+    "booking": {
+      "trigger": "이 원정 문의하기",
+      "triggerTier": "문의 · {tier}",
+      "title": "자리를 예약하세요",
+      "intro": "간단히 문의를 보내주시면 24시간 이내에 가능 여부와 상세 내역을 확인해 드립니다.",
+      "tour": "원정",
+      "tierLabel": {
+        "label": "경험 등급",
+        "standard": "스탠다드",
+        "deluxe": "디럭스",
+        "private": "프라이빗"
+      },
+      "adults": "성인",
+      "children": "어린이",
+      "preferredDate": "희망 출발일",
+      "specialRequests": "특별 요청",
+      "close": "닫기"
+    }
   }
 }
