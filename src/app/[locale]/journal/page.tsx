@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/footer';
 import { JournalHero } from '@/components/journal/journal-hero';
 import { JournalFeaturedCard } from '@/components/journal/journal-featured-card';
 import { JournalCard } from '@/components/journal/journal-card';
-import type { LocaleString, LocaleText, ImageWithAlt } from '@/types/sanity';
+import type { LocaleString, LocaleText, ImageWithAlt } from '@/types/tour';
 
 interface BlogPostCardItem {
   _id: string;

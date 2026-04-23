@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { LocaleLink } from '@/components/shared/locale-link';
 import { resolveLocaleField, type Locale } from '@/lib/locale/resolve-locale-field';
 import { urlFor } from '@/sanity/lib/image';
-import type { LocaleString, LocaleText, ImageWithAlt } from '@/types/sanity';
+import type { LocaleString, LocaleText, ImageWithAlt } from '@/types/tour';
 
 interface RelatedTourRef {
   _id: string;
@@ -12,7 +12,7 @@ interface RelatedTourRef {
   summary: LocaleText;
   heroImage: ImageWithAlt;
   duration: number;
-  difficulty: string;
+  difficulty: 'easy' | 'moderate' | 'challenging' | 'expert';
 }
 
 interface JournalRelatedToursProps {
@@ -57,7 +57,7 @@ export async function JournalRelatedTours({ tours, locale }: JournalRelatedTours
                   />
                 </div>
                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#D4A23A]">
-                  {tour.duration} day · {tour.difficulty}
+                  {tour.duration} {tTour('durationSuffix')} · {tour.difficulty}
                 </span>
                 <h3 className="font-serif text-2xl font-semibold text-[#F7F7F5]">{title}</h3>
                 <p className="line-clamp-2 text-sm text-[#A7ACB4]">{summary}</p>
