@@ -73,6 +73,7 @@ export default async function TourDetailPage({
   );
   if (!tour) notFound();
 
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
   const title = resolveLocaleField(tour.title, locale) ?? '';
   const summary = resolveLocaleField(tour.summary, locale) ?? '';
   const heroAlt = resolveLocaleField(tour.heroImage.alt, locale) ?? title;
@@ -109,7 +110,13 @@ export default async function TourDetailPage({
       {tour.itinerary && tour.itinerary.length > 0 ? (
         <TourItinerary days={tour.itinerary} locale={locale} />
       ) : null}
-      <TourPricing pricing={tour.pricing} tourSlug={tour.slug.current} locale={locale} />
+      <TourPricing
+        pricing={tour.pricing}
+        tourSlug={tour.slug.current}
+        tourTitle={title}
+        locale={locale}
+        siteKey={siteKey}
+      />
       <TourIncludedExcluded included={tour.included} excluded={tour.excluded} locale={locale} />
       {tour.gallery && tour.gallery.length > 0 ? (
         <TourGallery images={tour.gallery} locale={locale} />
@@ -120,7 +127,12 @@ export default async function TourDetailPage({
       {tour.relatedTours && tour.relatedTours.length > 0 ? (
         <TourRelated tours={tour.relatedTours} locale={locale} />
       ) : null}
-      <TourCtaBand tourSlug={tour.slug.current} />
+      <TourCtaBand
+        tourSlug={tour.slug.current}
+        tourTitle={title}
+        locale={locale}
+        siteKey={siteKey}
+      />
       <Footer />
     </main>
   );

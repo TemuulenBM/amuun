@@ -9,6 +9,8 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
   CONTACT_EMAIL_FROM: z.string().email().optional(),
   CONTACT_EMAIL_TO: z.string().email().optional(),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
+  TURNSTILE_SECRET_KEY: z.string().optional(),
   NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
   NEXT_PUBLIC_SITE_NAME: z.string().default('Amuun'),
 });
