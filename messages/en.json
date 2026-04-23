@@ -293,5 +293,18 @@
       "specialRequests": "Special requests",
       "close": "Close"
     }
+  },
+  "journalListing": {
+    "eyebrow": "Field Notes",
+    "title": "Stories from the Steppe",
+    "subtitle": "Dispatches from the ground — guides, photographers, and the people who call Mongolia home.",
+    "readArticle": "Read article",
+    "metaTitle": "Journal · Amuun",
+    "metaDescription": "Field notes from Mongolia — stories of the Gobi, the taiga, the Altai, and the people who call it home."
+  },
+  "journalArticle": {
+    "readTime": "{minutes} min read",
+    "relatedToursEyebrow": "Plan your journey",
+    "relatedToursHeading": "Expeditions You Might Consider"
   }
 }

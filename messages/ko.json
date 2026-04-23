@@ -293,5 +293,18 @@
       "specialRequests": "특별 요청",
       "close": "닫기"
     }
+  },
+  "journalListing": {
+    "eyebrow": "현장 노트",
+    "title": "스텝에서 온 이야기",
+    "subtitle": "가이드, 사진작가, 그리고 몽골을 고향이라 부르는 사람들이 보내온 기록.",
+    "readArticle": "기사 읽기",
+    "metaTitle": "저널 · Amuun",
+    "metaDescription": "몽골의 현장 노트 — 고비, 타이가, 알타이, 그리고 그곳을 고향으로 부르는 사람들의 이야기."
+  },
+  "journalArticle": {
+    "readTime": "{minutes}분 읽기",
+    "relatedToursEyebrow": "여정을 계획하세요",
+    "relatedToursHeading": "고려해볼 만한 원정"
   }
 }
